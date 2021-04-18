@@ -10,6 +10,7 @@ paths.forEach(path => {
 
 //Typing animation
 let target = document.getElementById('typing');
+target.style.fontWeight="bold";
 
 let text = "";
 let textBig = "AKA Sarif Mohammad Tasnim Islam. AKA Jack-ass of many trades, Kick-ass of none.";
@@ -44,4 +45,9 @@ let renderAnim = ()=>{
 	intvl = setInterval(writeLetter,80);
 }
 
+let scrollBelow = ()=>{
+	window.scrollTo(0,window.innerHeight-10);
+}
+
 setTimeout(renderAnim,5500);
+setTimeout(scrollBelow,12500);

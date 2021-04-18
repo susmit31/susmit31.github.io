@@ -13,14 +13,21 @@
 	padding: 100px 30px 80px 30px;
 	background: linear-gradient(tomato, rgb(240,120,120));
 	color: floralwhite;
+	position:relative;
+	display:flex;
+	align-items:center;
+	min-height:60vh;
 }
+
+.jumbotron.index{
+	min-height:100vh;
+}
+
+
+
 
 .navbar-dark {
   background: linear-gradient(rgb(255,100,90), rgb(250,50,50));
-}
-
-.active{
-	opacity:1;
 }
 
 body{
@@ -28,17 +35,19 @@ body{
 }
 
 nav{
-	border-bottom:1px solid red;
+	border-bottom:1px solid tomato;
+	min-height:60px;
 }
 
 #svg{
 	position:relative;
 	margin:3vh 0;
+	max-width:75vw;
 }
 
 #typing{
-	font-family:courier;
-	font-weight:bold;
+	color:white;
+	font-family:poppins;
 }
 
 @keyframes renderText{
