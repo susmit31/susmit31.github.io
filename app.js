@@ -50,4 +50,4 @@ let scrollBelow = ()=>{
 }
 
 setTimeout(renderAnim,5500);
-setTimeout(scrollBelow,13000);
+setTimeout(scrollBelow,13500);
