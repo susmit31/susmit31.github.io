@@ -34,11 +34,14 @@
 
 body{
 	background: linear-gradient(to right, rgb(250,200,200), rgb(250,240,240),rgb(250,200,200) );
+	margin:0;
+	padding:0;
 }
 
 nav{
 	border-bottom:1px solid tomato;
 	min-height:60px;
+	font-family:'Poppins';
 }
 
 #svg{
@@ -56,4 +59,8 @@ nav{
 	to{
 		stroke-dashoffset:0;
 	}
+}
+
+footer{
+	background-color:tomato;
 }

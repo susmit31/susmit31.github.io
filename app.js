@@ -46,8 +46,11 @@ let renderAnim = ()=>{
 }
 
 let scrollBelow = ()=>{
-	window.scrollTo(0,window.innerHeight-20);
+	console.log(window.scrollY);
+	if (window.scrollY<window.innerHeight-20){
+		window.scrollTo(0,window.innerHeight-20);
+	}
 }
 
-setTimeout(renderAnim,5500);
-setTimeout(scrollBelow,13500);
+setTimeout(renderAnim,5400);
+setTimeout(scrollBelow,13200);
