@@ -1,0 +1,48 @@
+.row-header {
+  margin: 0px auto;
+  padding: 0px 0px; }
+
+.row-content {
+  margin: 0px auto;
+  padding: 60px 0px;
+  border-bottom: 1px ridge;
+ }
+ 
+.jumbotron{
+	margin: 0px auto;
+	padding: 100px 30px 80px 30px;
+	background: linear-gradient(tomato, rgb(240,120,120));
+	color: floralwhite;
+}
+
+.navbar-dark {
+  background: linear-gradient(rgb(255,100,90), rgb(250,50,50));
+}
+
+.active{
+	opacity:1;
+}
+
+body{
+	background: linear-gradient(to right, rgb(250,180,180), rgb(250,240,240),rgb(250,180,180) );
+}
+
+nav{
+	border-bottom:1px solid red;
+}
+
+#svg{
+	position:relative;
+	margin:3vh 0;
+}
+
+#typing{
+	font-family:courier;
+	font-weight:bold;
+}
+
+@keyframes renderText{
+	to{
+		stroke-dashoffset:0;
+	}
+}
