@@ -62,8 +62,7 @@
 <path d="M372.324 24.7451H369.793L361.276 5.36523H360.854V31.7852H364.941C365.469 31.7852 365.847 31.8906 366.075 32.1016C366.304 32.2949 366.418 32.5586 366.418 32.8926C366.418 33.209 366.304 33.4727 366.075 33.6836C365.847 33.8945 365.469 34 364.941 34H356.768C356.24 34 355.862 33.8945 355.634 33.6836C355.405 33.4727 355.291 33.209 355.291 32.8926C355.291 32.5586 355.405 32.2949 355.634 32.1016C355.862 31.8906 356.24 31.7852 356.768 31.7852H358.64V5.36523H357.242C356.715 5.36523 356.337 5.26855 356.108 5.0752C355.88 4.86426 355.766 4.5918 355.766 4.25781C355.766 3.92383 355.88 3.66016 356.108 3.4668C356.337 3.25586 356.715 3.15039 357.242 3.15039H362.674L371.059 22.2402L379.312 3.15039H384.743C385.288 3.15039 385.675 3.25586 385.903 3.4668C386.132 3.66016 386.246 3.92383 386.246 4.25781C386.246 4.5918 386.132 4.86426 385.903 5.0752C385.675 5.26855 385.288 5.36523 384.743 5.36523H383.372V31.7852H385.218C385.763 31.7852 386.149 31.8906 386.378 32.1016C386.606 32.2949 386.721 32.5586 386.721 32.8926C386.721 33.209 386.606 33.4727 386.378 33.6836C386.149 33.8945 385.763 34 385.218 34H377.07C376.543 34 376.156 33.8945 375.91 33.6836C375.682 33.4727 375.567 33.209 375.567 32.8926C375.567 32.5586 375.682 32.2949 375.91 32.1016C376.139 31.8906 376.525 31.7852 377.07 31.7852H381.157V5.36523H380.683L372.324 24.7451Z" stroke="white" stroke-width="4" mask="url(#path-1-outside-1)"/>
 </svg>
 
-						<!--h1>SUSMIT ISLAM</h1-->
-						<div id="typing"> </div>
+						<div>Medical Student | Programmer | Aspiring Computational Biologist</div>
 					</div>
 				</div>
 			</div>
@@ -121,57 +120,6 @@
 			</div>
 		</section>
 		<footer> </footer>
-		<script>
-			//SVG animation
-			let paths = document.querySelectorAll('#svg path');
-			let i = 0;
-			paths.forEach(path => {
-				let len = path.getTotalLength();
-				path.style.strokeDasharray = `${len}px`;
-				path.style.strokeDashoffset = `${len}px`;
-				path.style.animation = `renderText 3s ease forwards ${.1*i}s`;
-				i++;
-			});
-			
-			//Typing animation
-			let target = document.getElementById('typing');
-			
-			let text = "";
-			let textBig = "AKA Sarif Mohammad Tasnim Islam. AKA Jack-ass of many trades, Kick-ass of none.";
-			let textMid = "AKA Sarif Mohammad Tasnim Islam.\nAKA Jack-ass of many trades, Kick-ass\nof none.";
-			let textSmol = "AKA Sarif Mohammad Tasnim \nIslam. AKA Jack-ass of many trades,\nKick-ass of none."
-			
-			let wd = window.innerWidth;
-			if(wd<800 && wd>600) text = textMid;
-			else if(wd<=600) {
-				let header = document.getElementById('svg');
-				header.style.width = '125%';
-				text=textSmol;
-			}
-			else text = textBig;
-			
-			let state = 0;
-			let ch = null;
-			
-			let writeLetter = ()=>{
-				if (state>=text.length) clearInterval(intvl);
-				else{
-					if(text[state]==' ') ch = '&nbsp';
-					else if(text[state]=='\n') ch = '<br/>';
-					else ch = text[state];
-					target.innerHTML += ch;
-					state++
-				}
-			}
-			
-			let intvl= 'null';
-			let renderAnim = ()=>{
-				intvl = setInterval(writeLetter,80);
-			}
-			
-			setTimeout(renderAnim,5500);
-			
-		</script>
 		<script src="js/main.js">
 	</body>
 </html>
