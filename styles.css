@@ -50,6 +50,7 @@ nav{
 	border-bottom:1px solid tomato;
 	min-height:60px;
 	font-family:'Poppins';
+	box-shadow:0 0 15px rgb(100,70,70);
 }
 
 .row-content{
@@ -100,6 +101,7 @@ a:hover{
 	font-weight:bold;
 	padding:2vw 4vw;
 	border-radius:9999px;
+	box-shadow:0 0 12px rgb(100,50,50);
 }
 
 .btn-container{
@@ -165,4 +167,8 @@ footer{
 
 footer >div{
 	max-width:70vw;
+}
+
+.row{
+	border:none;
 }
