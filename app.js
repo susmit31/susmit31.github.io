@@ -3,6 +3,10 @@ let paths = document.querySelectorAll('#svg path');
 let i = 0;
 paths.forEach(path => {
 	let len = path.getTotalLength();
+	
+	if (window.innerWidth < 768) path.style.strokeWidth = 3;
+	else path.style.strokeWidth = 2;
+	
 	path.style.strokeDasharray = `${len}px`;
 	path.style.strokeDashoffset = `${len}px`;
 	path.style.animation = `renderText 3s ease forwards ${.1*i}s`;
