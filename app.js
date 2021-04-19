@@ -15,7 +15,7 @@ paths.forEach(path => {
 
 // SVG fill animation
 let svg = document.querySelector('#svg');
-svg.style.animation = "fillShape .7s ease forwards 4.5s";
+svg.style.animation = "fillShape 1s ease forwards 4s";
 
 //Typing animation
 let target = document.getElementById('typing');
