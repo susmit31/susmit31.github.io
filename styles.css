@@ -100,6 +100,7 @@ a:hover{
 	font-family:'Poppins';
 	font-weight:bold;
 	padding:2vw 4vw;
+	border-width:0px;
 	border-radius:9999px;
 	box-shadow:0 0 12px rgb(100,50,50);
 }
