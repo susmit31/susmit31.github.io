@@ -54,3 +54,34 @@ let scrollBelow = ()=>{
 
 setTimeout(renderAnim,5400);
 setTimeout(scrollBelow,13200);
+
+let scrollSpy = ()=>{
+	let anchors = document.querySelectorAll('a.nav-link');
+	
+	// Determine distance of each section from the centre of screen height
+	let two_thirds_ht = window.innerHeight*2/3;
+	let y_of_top = window.scrollY;
+	
+	let intro = document.querySelector('#intro');
+	let about = document.querySelector('#about');
+	let contact = document.querySelector('#contact');
+	let sections = [intro, about, contact]
+	
+	let offsets = sections.map(x=>x.offsetTop);
+	
+	offsets.map(x=>console.log(x));
+	
+	anchors.forEach(x=>x.classList.remove('active'));
+	if (y_of_top + two_thirds_ht >= offsets[1] && y_of_top + two_thirds_ht < offsets[2]){
+		anchors[1].classList.add('active');		
+	}
+	else if(y_of_top +two_thirds_ht >= offsets[2]){
+		anchors[2].classList.add('active');
+	}
+	else{
+		anchors[0].classList.add('active');
+	}
+	
+}
+
+setInterval(scrollSpy,300);
