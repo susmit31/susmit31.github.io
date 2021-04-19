@@ -158,3 +158,12 @@ footer{
 	background-color:rgb(250,100,90);
 	color:white;
 }
+
+footer .row{
+	display:flex;
+	justify-content:center;
+}
+
+footer .row >div{
+	width:70vw;
+}
