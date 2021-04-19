@@ -30,6 +30,10 @@ code{
 	font-weight:bold;
 }
 
+#intro{
+	font-size:1rem;
+}
+
 .jumbotron.index{
 	min-height:100vh;
 }
