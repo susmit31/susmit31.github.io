@@ -157,13 +157,12 @@ a:hover{
 footer{
 	background-color:rgb(250,100,90);
 	color:white;
-}
-
-footer .row{
 	display:flex;
 	justify-content:center;
+	align-items:center;
+	height:100px;
 }
 
-footer .row >div{
-	width:70vw;
+footer >div{
+	max-width:70vw;
 }
