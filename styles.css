@@ -97,9 +97,8 @@ a:hover{
 	background-color:tomato;
 	text-transform:uppercase;
 	font-family:'Poppins';
-	font-size:1.2rem;
 	font-weight:bold;
-	padding:3vw 5vw;
+	padding:2vw 4vw;
 	border-radius:9999px;
 }
 
@@ -151,7 +150,7 @@ a:hover{
 	}
 }
 
-.fa-3x{
+.fa-2x{
 	color:tomato;
 }
 
