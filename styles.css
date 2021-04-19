@@ -48,9 +48,13 @@ body{
 
 nav{
 	border-bottom:1px solid tomato;
-	min-height:60px;
+	min-height:40px;
 	font-family:'Poppins';
 	box-shadow:0 0 15px rgb(100,70,70);
+}
+
+nav *{
+	text-transform:capitalize;
 }
 
 .row-content{
@@ -99,10 +103,18 @@ a:hover{
 	text-transform:uppercase;
 	font-family:'Poppins';
 	font-weight:bold;
-	padding:2vw 4vw;
 	border-width:0px;
 	border-radius:9999px;
 	box-shadow:0 0 12px rgb(100,50,50);
+	min-width:50vw;
+	padding:12px 0;
+}
+
+@media screen and (min-width:768px){
+	.btn-danger{
+		min-width:25vw;
+		padding:8px 0;
+	}
 }
 
 .btn-container{
@@ -124,6 +136,15 @@ a:hover{
 @keyframes renderText{
 	to{
 		stroke-dashoffset:0;
+	}
+}
+
+@keyframes fillShape{
+	0%{
+		fill: transparent;
+	}
+	100%{
+		fill: floralwhite;
 	}
 }
 

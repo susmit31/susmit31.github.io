@@ -1,3 +1,4 @@
+// SVG strokes animation
 let paths = document.querySelectorAll('#svg path');
 let i = 0;
 paths.forEach(path => {
@@ -7,6 +8,10 @@ paths.forEach(path => {
 	path.style.animation = `renderText 3s ease forwards ${.1*i}s`;
 	i++;
 });
+
+// SVG fill animation
+let svg = document.querySelector('#svg');
+svg.style.animation = "fillShape 1s ease forwards 5s";
 
 //Typing animation
 let target = document.getElementById('typing');
@@ -52,6 +57,8 @@ let scrollBelow = ()=>{
 	}
 }
 
+
+// Render typing animation
 setTimeout(renderAnim,5400);
 setTimeout(scrollBelow,13200);
 
