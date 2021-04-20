@@ -22,9 +22,9 @@ let target = document.getElementById('typing');
 target.style.fontWeight="bold";
 
 let text = "";
-let textBig = "AKA Sarif Mohammad Tasnim Islam. AKA Jack-ass of many trades, Kick-ass of none.";
-let textMid = "AKA Sarif Mohammad Tasnim Islam.\nAKA Jack-ass of many trades, Kick-ass\nof none.";
-let textSmol = "AKA Sarif Mohammad Tasnim \nIslam. AKA Jack-ass of many trades,\nKick-ass of none."
+let textBig = "Med Schooler | Programmer | Aspiring Computational Biologist";
+let textMid = "Med Schooler | Programmer | \nAspiring Computational Biologist";
+let textSmol = "Med Schooler | Programmer | \nAspiring Computational \nBiologist"
 
 let wd = window.innerWidth;
 if(wd<800 && wd>600) text = textMid;
