@@ -199,3 +199,8 @@ footer >div{
 .row{
 	border:none;
 }
+
+
+#typing{
+	max-width:80vw;
+}
