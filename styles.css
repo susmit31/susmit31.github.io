@@ -98,8 +98,8 @@ nav{
 	opacity:1;
 }
 
-a:hover{
-	color:white;
+a{
+	text-decoration:none;
 }
 
 .btn-danger{
