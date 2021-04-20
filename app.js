@@ -63,9 +63,11 @@ let scrollBelow = ()=>{
 
 
 // Render typing animation
-setTimeout(renderAnim,5400);
-setTimeout(scrollBelow,13200);
+setTimeout(renderAnim,5000);
+setTimeout(scrollBelow,11500);
 
+
+// Scroll Spy 
 let scrollSpy = ()=>{
 	let anchors = document.querySelectorAll('a.nav-link');
 	
