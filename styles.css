@@ -102,6 +102,10 @@ a{
 	text-decoration:none;
 }
 
+nav a:hover{
+	color:white;
+}
+
 .btn-danger{
 	background-color:tomato;
 	text-transform:uppercase;
