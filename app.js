@@ -98,3 +98,9 @@ let scrollSpy = ()=>{
 }
 
 setInterval(scrollSpy,300);
+
+
+// Set rel of all anchors to "noreferrer"
+
+let anchors = document.querySelectorAll('a');
+anchors.forEach(x=>x.rel="noreferrer");
