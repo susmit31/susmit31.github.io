@@ -21,7 +21,7 @@ let anim_fade_in = (paths)=>{
 	let i = 0;
 	paths.forEach(path => {
 		path.style.opacity = 0;
-		path.style.animation = `fadeInText 3s ease forwards ${.2*i}s`
+		path.style.animation = `fadeInText 1s ease forwards ${.2*i}s`
 		i++;
 	});
 }
@@ -31,7 +31,7 @@ anim_fade_in(paths);
 
 // SVG fill animation
 let anim_fill_shape = (svg)=>{
-	svg.style.animation = "fillShape 1.5s ease forwards 4s";
+	svg.style.animation = "fillShape 1s ease forwards 3s";
 }
 
 anim_fill_shape(document.querySelector('#svg'));
@@ -83,8 +83,8 @@ let anim_type = (target)=>{
 
 
 	// Render typing animation
-	setTimeout(renderAnim,5000);
-	setTimeout(scrollBelow,11500);
+	setTimeout(renderAnim,4000);
+	setTimeout(scrollBelow,10000);
 }
 
 anim_type(document.querySelector('#typing'));
