@@ -1,7 +1,7 @@
 let paths = document.querySelectorAll('#svg path');
 
 // SVG strokes animation
-let anim_strokes = (paths)=>{
+let anim_strokes = (paths, duration, delay)=>{
 	let i = 0;
 	paths.forEach(path => {
 		let len = path.getTotalLength();
@@ -11,35 +11,35 @@ let anim_strokes = (paths)=>{
 		
 		path.style.strokeDasharray = `${len}px`;
 		path.style.strokeDashoffset = `${len}px`;
-		path.style.animation = `renderText 3s ease forwards ${.1*i}s`;
+		path.style.animation = `renderText ${duration}s ease forwards ${delay*i}s`;
 		i++;
 	});
 }
 
 // SVG Fade In animation 
-let anim_fade_in = (paths)=>{
+let anim_fade_in = (paths, duration, delay)=>{
 	let i = 0;
 	paths.forEach(path => {
 		path.style.opacity = 0;
-		path.style.animation = `fadeInText 1s ease forwards ${.2*i}s`
+		path.style.animation = `fadeInText ${duration}s ease forwards ${delay*i}s`
 		i++;
 	});
 }
 
-anim_fade_in(paths);
+anim_fade_in(paths, 1, .2);
 
 
 // SVG fill animation
-let anim_fill_shape = (svg)=>{
-	svg.style.animation = "fillShape 1s ease forwards 3s";
+let anim_fill_shape = (svg, duration, delay)=>{
+	svg.style.animation = `fillShape ${duration}s ease forwards ${delay}s`;
 }
-
-anim_fill_shape(document.querySelector('#svg'));
+let svg = document.querySelector('#svg');
+anim_fill_shape(svg, 1, 3);
 
 
 
 //Typing animation
-let anim_type = (target)=>{
+let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=>{
 	target.style.fontWeight="bold";
 
 	let text = "";
@@ -72,7 +72,7 @@ let anim_type = (target)=>{
 
 	let intvl= 'null';
 	let renderAnim = ()=>{
-		intvl = setInterval(writeLetter,80);
+		intvl = setInterval(writeLetter,keyStrokeIntervalMS);
 	}
 
 	let scrollBelow = ()=>{
@@ -83,11 +83,12 @@ let anim_type = (target)=>{
 
 
 	// Render typing animation
-	setTimeout(renderAnim,4000);
-	setTimeout(scrollBelow,10000);
+	setTimeout(renderAnim,typeStartDelay*1000);
+	setTimeout(scrollBelow,scrollStartDelay*1000);
 }
 
-anim_type(document.querySelector('#typing'));
+let typingDiv = document.querySelector('#typing');
+anim_type(typingDiv, typeStartDelay=4, scrollStartDelay=10, keyStrokeIntervalMS=80);
 
 
 
