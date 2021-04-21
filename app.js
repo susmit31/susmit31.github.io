@@ -1,70 +1,94 @@
-// SVG strokes animation
 let paths = document.querySelectorAll('#svg path');
-let i = 0;
-paths.forEach(path => {
-	let len = path.getTotalLength();
-	
-	if (window.innerWidth < 768) path.style.strokeWidth = 3;
-	else path.style.strokeWidth = 2;
-	
-	path.style.strokeDasharray = `${len}px`;
-	path.style.strokeDashoffset = `${len}px`;
-	path.style.animation = `renderText 3s ease forwards ${.1*i}s`;
-	i++;
-});
+
+// SVG strokes animation
+let anim_strokes = (paths)=>{
+	let i = 0;
+	paths.forEach(path => {
+		let len = path.getTotalLength();
+		
+		if (window.innerWidth < 768) path.style.strokeWidth = 3;
+		else path.style.strokeWidth = 2;
+		
+		path.style.strokeDasharray = `${len}px`;
+		path.style.strokeDashoffset = `${len}px`;
+		path.style.animation = `renderText 3s ease forwards ${.1*i}s`;
+		i++;
+	});
+}
+
+// SVG Fade In animation 
+let anim_fade_in = (paths)=>{
+	let i = 0;
+	paths.forEach(path => {
+		path.style.opacity = 0;
+		path.style.animation = `fadeInText 3s ease forwards ${.2*i}s`
+		i++;
+	});
+}
+
+anim_fade_in(paths);
+
 
 // SVG fill animation
-let svg = document.querySelector('#svg');
-svg.style.animation = "fillShape 1s ease forwards 3.5s";
+let anim_fill_shape = (svg)=>{
+	svg.style.animation = "fillShape 1.5s ease forwards 4s";
+}
+
+anim_fill_shape(document.querySelector('#svg'));
+
+
 
 //Typing animation
-let target = document.getElementById('typing');
-target.style.fontWeight="bold";
+let anim_type = (target)=>{
+	target.style.fontWeight="bold";
 
-let text = "";
-let textBig = "Med Schooler | Programmer | Aspiring Computational Biologist";
-let textMid = "Med Schooler | Programmer | \nAspiring Computational Biologist";
-let textSmol = "Med Schooler | Programmer | \nAspiring Computational \nBiologist"
+	let text = "";
+	let textBig = "Med Schooler | Programmer | Aspiring Computational Biologist";
+	let textMid = "Med Schooler | Programmer | \nAspiring Computational Biologist";
+	let textSmol = "Med Schooler | Programmer | \nAspiring Computational \nBiologist"
 
-let wd = window.innerWidth;
-if(wd<800 && wd>600) text = textMid;
-else if(wd<=600) {
-	let header = document.getElementById('svg');
-	header.style.width = '125%';
-	text=textSmol;
-}
-else text = textBig;
-
-let state = 0;
-let ch = null;
-
-let writeLetter = ()=>{
-	if (state>=text.length) clearInterval(intvl);
-	else{
-		if(text[state]==' ') ch = '&nbsp';
-		else if(text[state]=='\n') ch = '<br/>';
-		else ch = text[state];
-		target.innerHTML += ch;
-		state++
+	let wd = window.innerWidth;
+	if(wd<800 && wd>600) text = textMid;
+	else if(wd<=600) {
+		let header = document.getElementById('svg');
+		header.style.width = '125%';
+		text=textSmol;
 	}
-}
+	else text = textBig;
 
-let intvl= 'null';
-let renderAnim = ()=>{
-	intvl = setInterval(writeLetter,80);
-}
+	let state = 0;
+	let ch = null;
 
-let scrollBelow = ()=>{
-	console.log(window.scrollY);
-	if (window.scrollY<window.innerHeight-20){
-		window.scrollTo(0,window.innerHeight-20);
+	let writeLetter = ()=>{
+		if (state>=text.length) clearInterval(intvl);
+		else{
+			if(text[state]==' ') ch = '&nbsp';
+			else if(text[state]=='\n') ch = '<br/>';
+			else ch = text[state];
+			target.innerHTML += ch;
+			state++
+		}
 	}
+
+	let intvl= 'null';
+	let renderAnim = ()=>{
+		intvl = setInterval(writeLetter,80);
+	}
+
+	let scrollBelow = ()=>{
+		if (window.scrollY<window.innerHeight-20){
+			window.scrollTo(0,window.innerHeight-20);
+		}
+	}
+
+
+	// Render typing animation
+	setTimeout(renderAnim,5000);
+	setTimeout(scrollBelow,11500);
 }
 
+anim_type(document.querySelector('#typing'));
 
-// Render typing animation
-setTimeout(renderAnim,5000);
-setTimeout(scrollBelow,11500);
 
 
 // Scroll Spy 
@@ -81,8 +105,6 @@ let scrollSpy = ()=>{
 	let sections = [intro, about, contact]
 	
 	let offsets = sections.map(x=>x.offsetTop);
-	
-	offsets.map(x=>console.log(x));
 	
 	anchors.forEach(x=>x.classList.remove('active'));
 	if (y_of_top + two_thirds_ht >= offsets[1] && y_of_top + two_thirds_ht < offsets[2]){

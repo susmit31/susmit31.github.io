@@ -143,6 +143,12 @@ nav a:hover{
 	}
 }
 
+@keyframes fadeInText{
+	to{
+		opacity:1;
+	}
+}
+
 @keyframes fillShape{
 	0%{
 		fill: transparent;
