@@ -1,3 +1,9 @@
+:root{
+	--navbar-ht:40px;
+	scroll-padding-top:var(--navbar-ht);
+	scroll-behavior:smooth;
+}
+
 body{
 	font-size:1.2rem;
 	line-height:2;
@@ -49,7 +55,7 @@ body{
 
 nav{
 	border-bottom:1px solid tomato;
-	min-height:40px;
+	min-height:var(--navbar-ht);
 	font-family:'Poppins';
 	box-shadow:0 0 15px rgb(100,70,70);
 }
