@@ -21,12 +21,21 @@ let anim_fade_in = (paths, duration, delay)=>{
 	let i = 0;
 	paths.forEach(path => {
 		path.style.opacity = 0;
+		path.style.stroke='#ffffff';
 		path.style.animation = `fadeInText ${duration}s ease forwards ${delay*i}s`
 		i++;
 	});
 }
 
 anim_fade_in(paths, 1, .2);
+
+// Navbar Fade In
+let anim_nav_fade_in = (nav, duration, delay) => {
+	nav.style.opacity = 0;
+	nav.style.animation =  `fadeInText ${duration}s ease-in-out forwards ${delay}s`;
+}
+let nav = document.querySelector('nav');
+//anim_nav_fade_in(nav, 1, 10);
 
 
 // SVG fill animation
@@ -45,7 +54,7 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 	let text = "";
 	let textBig = "Med Schooler | Programmer | Aspiring Computational Biologist";
 	let textMid = "Med Schooler | Programmer | \nAspiring Computational Biologist";
-	let textSmol = "Med Schooler | Programmer | \nAspiring Computational \nBiologist"
+	let textSmol = "Med Schooler | Programmer | \nAspiring Computational \nBiologist";
 
 	let wd = window.innerWidth;
 	if(wd<800 && wd>600) text = textMid;

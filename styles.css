@@ -58,6 +58,7 @@ nav{
 	min-height:var(--navbar-ht);
 	font-family:'Poppins';
 	box-shadow:0 0 15px rgb(100,70,70);
+	width:100vw;
 }
 
 .row-content{
@@ -152,6 +153,12 @@ nav a:hover{
 @keyframes fadeInText{
 	to{
 		opacity:1;
+	}
+}
+
+@keyframes slideIn{
+	to{
+		left:0;
 	}
 }
 
