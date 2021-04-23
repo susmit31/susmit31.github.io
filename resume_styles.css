@@ -1,70 +1,68 @@
 *{
 	box-sizing:border-box;
-	--fs-default:.95rem
+	--fs-default:.95rem;
+	--fs-sm-md:1.1rem;
+	--fs-md:1.3rem;
+	--fs-md-lg:1.5rem;
+	--fs-lg:1.8rem;
 }
 
-body{
+body *{
 	font-family:'Poppins', sans-serif;
+	font-size:var(--fs-default);
+	font-weight:bold;
+	line-height:1.3;
+}
+
+a{
+	text-decoration:none;
 }
 
 .jumbotron{
-	height:40vh;
 	background-color:black;
 	color:white;
 	padding:20px 10px;
-	border:1px solid tomato;
 	display:flex;
 	flex-direction:column;
 	justify-content:center;
-}
-
-.jumbotron h1{
-	font-size:1.8rem;
-	font-weight:bold;
-}
-
-#tagline{
-	font-size:var(--fs-default);
-}
-
-@media screen and (max-width:768px){
-	.jumbotron h1{
-		font-size:1.5rem;
-	}
-}
-
-.jumbotron p{
-	font-size:var(--fs-default);
+	padding-bottom:5px;
 }
 
 .jumbotron a{
 	color:white;
 }
 
-.jumbotron div{
-	font-size:1rem;
+h1{
+	font-size:var(--fs-lg);
 }
 
-.row-content{
+@media screen and (max-width:768px){
+	h1{
+		font-size:var(--fs-md-lg);
+	}
+}
+
+.row-content:not(.jumbotron *){
 	padding:5vh 10px;
-	font-weight:bold;
-}
-
-.jumbotron .row-content{
-	padding:0;
 }
 
 section .row-content{
 	border-bottom:2px solid gray;
 }
 
-p{
+.sec-head{
+	font-size:var(--fs-md);
+	padding-bottom:10px;
+}
+
+.sec-body, .li-body *, .work-descr *{
 	font-family:sans-serif;
 	font-weight:normal;
 }
 
-.jumbotron .row-content{
-	padding-bottom:0;
+.li-head{
+	font-family:'Poppins';
+	font-size:var(--fs-sm-md);
 }
 
 .icons.row{
@@ -72,21 +70,11 @@ p{
 	padding-top:10px;
 }
 
-.icons p{
-	font-family:'Poppins', sans-serif;
-	font-size:.75rem;
-}
-
 .icons *{
+	font-size:.75rem;
 	display:flex;
 	align-items:center;
 	margin:2px;
-}
-
-
-.icons div *{
-	margin:2px;
-	overflow-wrap:break-word;
 }
 
 .fa{
@@ -99,81 +87,50 @@ p{
 	}
 }
 
-li{
-	margin-bottom:10px;
-}
-
-#summary p{
-	font-family:'Poppins';
-	font-weight:bold;
-	line-height:1.5;
-}
-
 #education{
 	font-size:var(--fs-default);
-}
-
-#skills li{
-	font-family:sans-serif;
-	font-weight:normal;
-	margin:0;
-}
-
-.work-heading, .school{
-	font-size:1.1rem;
 }
 
 .bangla{
 	font-weight:normal;
 }
 
-.work-descr{
-	font-family:sans-serif;
-	font-weight:normal;
-}
-
-.work-descr li{
+li{
 	line-height:1.4;
 	margin-bottom:4px;
 }
 
 .degree::before{
 	content:"Degree:";
+	font-family:'Poppins';
+	font-weight:bold;
 	display:inline-block;
 }
 
 .gpa::before{
 	content:"GPA:";
+	font-family:'Poppins';
+	font-weight:bold;
 	display:inline-block;
 }
 
 .graduation::before{
+	font-weight:bold;
+	font-family:'Poppins';
 	content:"Year of Graduation:";
 	display:inline-block;
 }
 
-#education div{
-	font-family:sans-serif;
-	font-size:1rem;
-	font-weight:normal;
-}
-
-#education .school{
-	font-family:'Poppins';
-	font-size:1.1rem;
-	font-weight:bold;
-}
-a{
-	text-decoration:none;
-}
-
-
-
-#skills h5{
-	font-family:'Poppins';
-	font-weight:bold;
-}
-
-#skills p{
+#skills .lib-list{
 	margin-bottom:0px;
+}
+
+#libs li{
+	font-family:'Poppins';
+	font-weight:bold;
+}
+
+#skills ul{
+	list-style-type:none;
+	padding-left:10px;
 }
