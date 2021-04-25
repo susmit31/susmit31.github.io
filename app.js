@@ -35,7 +35,7 @@ let anim_nav_fade_in = (nav, duration, delay) => {
 	nav.style.animation =  `fadeInText ${duration}s ease-in-out forwards ${delay}s`;
 }
 let nav = document.querySelector('nav');
-anim_nav_fade_in(nav, 1, 8.6);
+anim_nav_fade_in(nav, 1, 8);
 
 
 // SVG fill animation
@@ -43,7 +43,7 @@ let anim_fill_shape = (svg, duration, delay)=>{
 	svg.style.animation = `fillShape ${duration}s ease forwards ${delay}s`;
 }
 let svg = document.querySelector('#svg');
-anim_fill_shape(svg, 1, 2.5);
+anim_fill_shape(svg, 1, 1.8);
 
 
 
@@ -97,7 +97,7 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 }
 
 let typingDiv = document.querySelector('#typing');
-anim_type(typingDiv, typeStartDelay=4, scrollStartDelay=8.5, keyStrokeIntervalMS=50);
+anim_type(typingDiv, typeStartDelay=3.5, scrollStartDelay=8, keyStrokeIntervalMS=50);
 
 
 
