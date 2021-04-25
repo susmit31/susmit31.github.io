@@ -83,6 +83,7 @@ nav{
 .nav{
 	width:100vw;
 	display:flex;
+	animation:fadeInText 1s ease-in-out forwards 2s;
 	justify-content:space-between;
 }
 
