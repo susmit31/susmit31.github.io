@@ -151,7 +151,11 @@ nav a:hover{
 }
 
 @keyframes fadeInText{
-	to{
+	70%{
+		opacity:1;
+		stroke-width:4;
+	}
+	100%{
 		opacity:1;
 	}
 }
