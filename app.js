@@ -43,7 +43,7 @@ let anim_fill_shape = (svg, duration, delay)=>{
 	svg.style.animation = `fillShape ${duration}s ease forwards ${delay}s`;
 }
 let svg = document.querySelector('#svg');
-anim_fill_shape(svg, 1, 3);
+anim_fill_shape(svg, 1, 3.5);
 
 
 
@@ -97,7 +97,7 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 }
 
 let typingDiv = document.querySelector('#typing');
-anim_type(typingDiv, typeStartDelay=4, scrollStartDelay=10, keyStrokeIntervalMS=80);
+anim_type(typingDiv, typeStartDelay=4.7, scrollStartDelay=10, keyStrokeIntervalMS=80);
 
 
 
