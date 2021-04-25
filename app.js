@@ -35,7 +35,7 @@ let anim_nav_fade_in = (nav, duration, delay) => {
 	nav.style.animation =  `fadeInText ${duration}s ease-in-out forwards ${delay}s`;
 }
 let nav = document.querySelector('nav');
-//anim_nav_fade_in(nav, 1, 10);
+anim_nav_fade_in(nav, 1, 10);
 
 
 // SVG fill animation
