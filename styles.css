@@ -91,7 +91,7 @@ nav{
 	color:white;
 	opacity:.5;
 	padding-bottom:0;
-	min-width:25vw;
+	min-width:22vw;
 	display:flex;
 	justify-content:center;
 }
@@ -221,13 +221,18 @@ nav a:hover{
 }
 
 footer{
-	
 	background: linear-gradient(rgb(255,100,100), rgb(250,50,50));
 	color:white;
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	height:170px;
+}
+
+@media screen and (min-width:768px){
+	footer{
+		height:100px;
+	}
 }
 
 footer >div{
