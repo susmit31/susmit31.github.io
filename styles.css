@@ -161,6 +161,19 @@ nav a:hover{
 	}
 }
 
+@media screen and (min-width:768px){
+	@keyframes fadeInText{
+	70%{
+		opacity:1;
+		stroke-width:4;
+	}
+	100%{
+		opacity:1;
+	}
+}
+
+}
+
 @keyframes slideIn{
 	to{
 		left:0;
