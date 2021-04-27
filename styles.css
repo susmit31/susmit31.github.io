@@ -221,12 +221,13 @@ nav a:hover{
 }
 
 footer{
-	background-color:rgb(250,90,70);
+	
+	background: linear-gradient(rgb(255,100,100), rgb(250,50,50));
 	color:white;
 	display:flex;
 	justify-content:center;
 	align-items:center;
-	height:100px;
+	height:170px;
 }
 
 footer >div{
