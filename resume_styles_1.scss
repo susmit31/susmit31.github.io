@@ -1,0 +1,121 @@
+@import 'utils';
+@import 'config';
+
+*{
+	box-sizing: border-box;
+}
+
+body *{
+	font-family:'Poppins', sans-serif;
+	font-size: $fs-default;
+	font-weight:bold;
+	line-height: $line-ht;
+}
+
+a{
+	text-decoration:none;
+}
+
+.jumbotron{
+	@include bg-and-font($bg);
+	padding:20px 10px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	padding-bottom:5px;
+	
+	a{
+		color: select-font-clr($bg);
+	}
+	
+	.fa{
+		color: select-font-clr($bg);
+	}
+}
+
+h1{
+	font-size: $fs-lg;
+}
+
+.row-content:not(.jumbotron *){
+	padding:5vh 10px;
+}
+
+section{
+	.row-content{
+		border-bottom:2px solid gray;
+	}
+	
+	.sec-head{
+		font-size: $fs-md;
+		padding-bottom: 10px;
+	}
+}
+
+.sec-body, .li-body *, .work-descr *{
+	font-family: sans-serif;
+	font-weight: normal;
+}
+
+.li-head{
+	font-family: 'Poppins';
+	font-size: $fs-sm-md;
+}
+
+.icons{
+	*{
+		font-size: $fs-default * .8;
+		display:flex;
+		align-items:center;
+		margin:2px;
+	}
+	&.row{
+		padding-bottom:8px;
+		padding-top:10px;
+	}
+}
+
+#education{
+	font-size: $fs-default;
+}
+
+.bangla{
+	font-weight:normal;
+}
+
+li{
+	line-height: $line-ht*1.05;
+	margin-bottom:4px;
+}
+
+.degree, .gpa, .graduation{
+	&::before{
+		font-family:'Poppins';
+		font-weight:bold;
+		display:inline-block;
+	}
+}
+
+.degree::before{
+	content:"Degree:";
+}
+
+.gpa::before{
+	content:"GPA:";
+}
+
+.graduation::before{
+	content:"Year of Graduation:";
+}
+
+#skills{
+	.lib-list{
+		margin-bottom:0px;
+	}
+	ul{
+		list-style-type:none;
+		padding-left:10px;
+	}
+}
+
+@import 'mobile';

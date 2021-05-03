@@ -1,0 +1,12 @@
+@function select-font-clr($bg-clr){
+	@if(lightness($bg-clr)<70){
+		@return white;
+	}
+	@else{
+		@return black;
+	}
+}
+@mixin bg-and-font($bg-clr){
+	background-color: $bg-clr;
+	color: select-font-clr($bg-clr);
+}
