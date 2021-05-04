@@ -80,6 +80,25 @@ nav{
 
 .row-content{
 	padding-bottom:0;
+	overflow:hidden;
+	
+	&>*{
+		overflow:hidden;
+	}
+	
+	&.from-left{
+		opacity:0;
+		transform: translateX(-50%);
+		transition: transform 400ms ease-in-out,
+					opacity 400ms ease-in-out;
+	}
+	
+	&.from-right{
+		opacity:0;
+		transform: translateX(50%);
+		transition: transform 400ms ease-in-out,
+					opacity 400ms ease-in-out;
+	}
 	
 	&::after{
 		content:'';
@@ -93,6 +112,12 @@ nav{
 	&.last-row::after{
 		background:$clr-bg;
 	}
+}
+
+.from-left.appear,
+.from-right.appear{
+	opacity:1;
+	transform: translateX(0);
 }
 
 a{

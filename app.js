@@ -93,7 +93,7 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 
 	// Render typing animation
 	setTimeout(renderAnim,typeStartDelay*1000);
-	setTimeout(scrollBelow,scrollStartDelay*1000);
+	//setTimeout(scrollBelow,scrollStartDelay*1000);
 }
 
 let typingDiv = document.querySelector('#typing');
@@ -116,9 +116,11 @@ let scrollSpy = ()=>{
 	
 	let offsets = sections.map(x=>x.offsetTop);
 	
-	anchors.forEach(x=>x.classList.remove('active'));
+	anchors.forEach(x=>{
+		x.classList.remove('active');
+	});
 	if (y_of_top + two_thirds_ht >= offsets[1] && y_of_top + two_thirds_ht < offsets[2]){
-		anchors[1].classList.add('active');		
+		anchors[1].classList.add('active');	
 	}
 	else if(y_of_top +two_thirds_ht >= offsets[2]){
 		anchors[2].classList.add('active');
@@ -129,8 +131,35 @@ let scrollSpy = ()=>{
 	
 }
 
-setInterval(scrollSpy,300);
+let slideInSec = ()=>{
+	let from_rt = document.querySelectorAll('.from-right');
+	let from_lt = document.querySelectorAll('.from-left');
+	let secs = [...from_lt, ...from_rt];
+	console.log(secs);
+	
+	const options = {
+		threshold: .2,
+		rootMargin: "0px 0px 0px 0px"
+	}
+	const callback  = (entries, observer)=>{
+		entries.forEach(entry=>{
+			if(entry.isIntersecting){
+				entry.target.classList.add('appear');
+			}
+			else{
+				entry.target.classList.remove('appear');
+			}
+		});
+	};
+	let observer = new IntersectionObserver(callback, options);
+	
+	secs.forEach(sec=>{
+		observer.observe(sec);
+	});
+}
 
+setInterval(scrollSpy,300);
+slideInSec();
 
 // Set rel of all anchors to "noreferrer"
 
