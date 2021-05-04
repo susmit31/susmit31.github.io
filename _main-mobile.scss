@@ -1,0 +1,25 @@
+@media screen and (min-width:768px){
+	.btn-danger{
+		min-width:25vw;
+		padding:8px 0;
+	}
+	
+	@keyframes fadeInText{
+		70%{
+			opacity:1;
+			stroke-width:4;
+		}
+		100%{
+			opacity:1;
+		}
+	}
+	
+	.social-links>div{
+		min-width:15vw;
+		margin:2vw;
+	}
+	
+	footer{
+		height:100px;
+	}
+}

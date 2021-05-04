@@ -1,5 +1,5 @@
-@import 'utils';
-@import 'config';
+@import 'resume-utils';
+@import 'resume-config';
 
 *{
 	box-sizing: border-box;
@@ -118,4 +118,4 @@ li{
 	}
 }
 
-@import 'mobile';
+@import 'resume-mobile';

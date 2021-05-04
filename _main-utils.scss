@@ -1,0 +1,16 @@
+@function nav-gradient($clr){
+	@return linear-gradient(lighten($clr,5%), darken($clr,5%));
+}
+
+@function jumbo-gradient($clr){
+	@return linear-gradient(darken($clr,2%), lighten($clr,5%));
+}
+
+@function font-clr($clr){
+	@if(lightness($clr) > 70){
+		@return black;
+	}
+	@else{
+		@return white;
+	}
+}
