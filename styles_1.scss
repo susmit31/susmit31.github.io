@@ -85,14 +85,14 @@ nav{
 	opacity:0;
 	&.from-left{
 		//transform: translateX(-50%);
-		transition: transform 500ms ease-in-out,
-					opacity 500ms ease-in-out;
+		transition: transform $fade-in-durn ease-in-out,
+					opacity $fade-in-durn ease-in-out;
 	}
 	
 	&.from-right{
 		//transform: translateX(50%);
-		transition: transform 500ms ease-in-out,
-					opacity 500ms ease-in-out;
+		transition: transform $fade-in-durn ease-in-out,
+					opacity $fade-in-durn ease-in-out;
 	}
 	
 	&::after{

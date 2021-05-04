@@ -93,7 +93,7 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 
 	// Render typing animation
 	setTimeout(renderAnim,typeStartDelay*1000);
-	//setTimeout(scrollBelow,scrollStartDelay*1000);
+	setTimeout(scrollBelow,scrollStartDelay*1000);
 }
 
 let typingDiv = document.querySelector('#typing');
