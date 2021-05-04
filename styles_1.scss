@@ -50,7 +50,7 @@ nav{
 	background: nav-gradient($clr-primary);
 	min-height: $nav-ht;
 	//font-family: $font-primary;
-	box-shadow:0 0 15px rgb(100,70,70);
+	box-shadow:0 0 15px darken($clr-primary, 15%);
 	width:100vw;
 	
 	ul{
@@ -67,7 +67,7 @@ nav{
 			justify-content:center;
 			
 			&.active{
-				border-bottom:5px solid rgb(255,100,100);
+				border-bottom:5px solid lighten($clr-primary,10%);
 				border-radius:3px;
 				opacity:1;
 			}

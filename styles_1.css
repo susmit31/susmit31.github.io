@@ -29,7 +29,7 @@ code {
 .jumbotron {
   margin: 0px auto;
   padding: 70px 10vw 50px 5vw;
-  background: linear-gradient(#ff5a3d, #ff7961);
+  background: linear-gradient(#760076, #9a009a);
   color: white;
   position: relative;
   display: flex;
@@ -43,9 +43,9 @@ code {
 }
 
 nav {
-  background: linear-gradient(#ff7961, #ff4d2e);
+  background: linear-gradient(#9a009a, #670067);
   min-height: 40px;
-  box-shadow: 0 0 15px #644646;
+  box-shadow: 0 0 15px #340034;
   width: 100vw;
 }
 nav ul {
@@ -62,7 +62,7 @@ nav ul .nav-link {
   justify-content: center;
 }
 nav ul .nav-link.active {
-  border-bottom: 5px solid #ff6464;
+  border-bottom: 5px solid #b300b3;
   border-radius: 3px;
   opacity: 1;
 }
@@ -87,7 +87,7 @@ nav ul .nav-link:hover {
   margin-top: 50px;
   height: 3px;
   width: 70vw;
-  background: tomato;
+  background: purple;
   border-radius: 3px;
 }
 .row-content.last-row::after {
@@ -105,7 +105,7 @@ a {
 }
 
 .btn-danger {
-  background: tomato;
+  background: purple;
   text-transform: uppercase;
   font-family: "Poppins";
   font-weight: bold;
@@ -172,11 +172,11 @@ a {
   min-width: 33vw;
 }
 .social-links i {
-  color: tomato;
+  color: purple;
 }
 
 footer {
-  background: tomato;
+  background: purple;
   color: white;
   display: flex;
   justify-content: center;
