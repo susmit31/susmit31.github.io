@@ -73,18 +73,12 @@ nav ul .nav-link:hover {
 .row-content {
   padding-bottom: 0;
   overflow: hidden;
-}
-.row-content > * {
-  overflow: hidden;
+  opacity: 0;
 }
 .row-content.from-left {
-  opacity: 0;
-  transform: translateX(-50%);
   transition: transform 400ms ease-in-out, opacity 400ms ease-in-out;
 }
 .row-content.from-right {
-  opacity: 0;
-  transform: translateX(50%);
   transition: transform 400ms ease-in-out, opacity 400ms ease-in-out;
 }
 .row-content::after {

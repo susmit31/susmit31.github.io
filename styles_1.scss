@@ -12,6 +12,7 @@ body{
 	background: $clr-bg;
 	margin:0;
 	padding:0;
+	//overflow-x:hidden;
 }
 
 code{
@@ -81,21 +82,15 @@ nav{
 .row-content{
 	padding-bottom:0;
 	overflow:hidden;
-	
-	&>*{
-		overflow:hidden;
-	}
-	
+	opacity:0;
 	&.from-left{
-		opacity:0;
-		transform: translateX(-50%);
+		//transform: translateX(-50%);
 		transition: transform 400ms ease-in-out,
 					opacity 400ms ease-in-out;
 	}
 	
 	&.from-right{
-		opacity:0;
-		transform: translateX(50%);
+		//transform: translateX(50%);
 		transition: transform 400ms ease-in-out,
 					opacity 400ms ease-in-out;
 	}
