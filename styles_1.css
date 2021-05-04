@@ -76,10 +76,10 @@ nav ul .nav-link:hover {
   opacity: 0;
 }
 .row-content.from-left {
-  transition: transform 400ms ease-in-out, opacity 400ms ease-in-out;
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
 }
 .row-content.from-right {
-  transition: transform 400ms ease-in-out, opacity 400ms ease-in-out;
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
 }
 .row-content::after {
   content: "";
