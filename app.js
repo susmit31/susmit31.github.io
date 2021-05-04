@@ -138,8 +138,8 @@ let slideInSec = ()=>{
 	console.log(secs);
 	
 	const options = {
-		threshold: .2,
-		rootMargin: "0px 0px 0px 0px"
+		threshold: .1,
+		rootMargin: "0px 0px 100px 0px"
 	}
 	const callback  = (entries, observer)=>{
 		entries.forEach(entry=>{
