@@ -12,7 +12,6 @@ body{
 	background: $clr-bg;
 	margin:0;
 	padding:0;
-	//overflow-x:hidden;
 }
 
 code{
@@ -49,7 +48,7 @@ code{
 nav{
 	background: nav-gradient($clr-primary);
 	min-height: $nav-ht;
-	//font-family: $font-primary;
+	font-size: $fs-default*.8;
 	box-shadow:0 0 15px darken($clr-primary, 15%);
 	width:100vw;
 	

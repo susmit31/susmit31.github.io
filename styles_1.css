@@ -1,5 +1,5 @@
 :root {
-  scroll-padding-top: 40px;
+  scroll-padding-top: 30px;
   scroll-behavior: smooth;
 }
 
@@ -44,7 +44,8 @@ code {
 
 nav {
   background: linear-gradient(#9a009a, #670067);
-  min-height: 40px;
+  min-height: 30px;
+  font-size: 0.96rem;
   box-shadow: 0 0 15px #340034;
   width: 100vw;
 }
