@@ -135,11 +135,10 @@ let slideInSec = ()=>{
 	let from_rt = document.querySelectorAll('.from-right');
 	let from_lt = document.querySelectorAll('.from-left');
 	let secs = [...from_lt, ...from_rt];
-	console.log(secs);
 	
 	const options = {
-		threshold: 0,
-		rootMargin: `-${window.innerHeight-170}px 0px -170px 0px`
+		threshold: 0.1,
+		rootMargin: `-${window.innerHeight-250}px 0px 0px 0px`
 	}
 	const callback  = (entries, observer)=>{
 		entries.forEach(entry=>{
