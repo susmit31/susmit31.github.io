@@ -139,7 +139,7 @@ let slideInSec = ()=>{
 	
 	const options = {
 		threshold: 0,
-		rootMargin: `-${window.innerHeight-200}px 0px -200px 0px`
+		rootMargin: `-${window.innerHeight-170}px 0px -170px 0px`
 	}
 	const callback  = (entries, observer)=>{
 		entries.forEach(entry=>{
