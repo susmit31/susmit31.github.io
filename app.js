@@ -85,8 +85,8 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 	}
 
 	let scrollBelow = ()=>{
-		if (window.scrollY<window.innerHeight-20){
-			window.scrollTo(0,window.innerHeight-20);
+		if (window.scrollY<window.innerHeight-40){
+			window.scrollTo(0,window.innerHeight-40);
 		}
 	}
 
