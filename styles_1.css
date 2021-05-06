@@ -125,6 +125,7 @@ a {
 
 #typing {
   color: white;
+  font-size: 1.02rem;
   font-family: "Poppins", sans-serif;
 }
 
@@ -188,6 +189,10 @@ footer > div {
   .btn-danger {
     min-width: 25vw;
     padding: 8px 0;
+  }
+
+  #typing {
+    font-size: 1.2rem;
   }
 
   @keyframes fadeInText {

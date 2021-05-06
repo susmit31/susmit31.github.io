@@ -4,6 +4,10 @@
 		padding:8px 0;
 	}
 	
+	#typing{
+		font-size: $fs-default;
+	}
+	
 	@keyframes fadeInText{
 		70%{
 			opacity:1;
