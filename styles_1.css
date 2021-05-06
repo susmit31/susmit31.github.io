@@ -29,19 +29,15 @@ code {
 .jumbotron {
   margin: 0px auto;
   padding: 70px 10vw 50px 5vw;
-  background: linear-gradient(#760076, #9a009a);
+  background: purple;
   color: white;
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 60vh;
+  height: 100vh;
   font-family: "Poppins";
   font-weight: bold;
 }
-.jumbotron.index {
-  min-height: 100vh;
-}
-
 nav {
   background: linear-gradient(#9a009a, #670067);
   min-height: 30px;
@@ -125,6 +121,7 @@ a {
   position: relative;
   margin: 3vh 0;
   max-width: 80vw;
+  z-index: 10;
 }
 
 #typing {

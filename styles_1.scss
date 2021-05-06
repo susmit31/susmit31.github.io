@@ -32,16 +32,16 @@ code{
 .jumbotron{
 	margin:0px auto;
 	padding:70px 10vw 50px 5vw;
-	background: jumbo-gradient($clr-primary);
+	background: $clr-primary;
 	color: font-clr($clr-primary);
 	position:relative;
 	display:flex;
 	align-items:center;
-	min-height: 60vh;
+	height: $header-ht;
 	font-family: $font-primary;
 	font-weight: bold;
 	&.index{
-		min-height:100vh;
+		//min-height:100vh;
 	}
 }
 
@@ -138,6 +138,7 @@ a{
 	position:relative;
 	margin:3vh 0;
 	max-width:80vw;
+	z-index:10;
 }
 
 #typing{
