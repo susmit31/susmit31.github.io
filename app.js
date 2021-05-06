@@ -97,7 +97,7 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 }
 
 let typingDiv = document.querySelector('#typing');
-anim_type(typingDiv, typeStartDelay=3.5, scrollStartDelay=7.7 , keyStrokeIntervalMS=50);
+anim_type(typingDiv, typeStartDelay=3.5, scrollStartDelay=7.2 , keyStrokeIntervalMS=40);
 
 
 
@@ -138,7 +138,7 @@ let slideInSec = ()=>{
 	
 	const options = {
 		threshold: 0,
-		rootMargin: `-250px 0px -200px 0px`
+		rootMargin: `-${window.innerHeight-300}px 0px -200px 0px`
 	}
 	const callback  = (entries, observer)=>{
 		entries.forEach(entry=>{
