@@ -29,7 +29,7 @@ code {
 .jumbotron {
   margin: 0px auto;
   padding: 70px 10vw 50px 5vw;
-  background: purple;
+  background: linear-gradient(#760076, #9a009a);
   color: white;
   position: relative;
   display: flex;
