@@ -3,7 +3,7 @@
 }
 
 @function jumbo-gradient($clr){
-	@return linear-gradient(color.scale($clr,$lightness:-15%), color.scale($clr,$lightness:5%));
+	@return linear-gradient(color.scale($clr,$lightness:-10%), color.scale($clr,$lightness:5%));
 }
 
 @function font-clr($clr){
