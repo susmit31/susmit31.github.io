@@ -39,13 +39,18 @@ for (family in clr_fam){
 		
 		let textContainer = document.createElement('div');
 		let text = document.createElement('p');
-		text.textContent = clr;
+		text.textContent = `${clr}\n(click to copy)`;
 		text.style.display='inline';
 		text.style.overflowWrap = 'break-word';
 		text.classList.add('text');
 		
 		textContainer.appendChild(text)
 		block.appendChild(textContainer);
+		block.addEventListener('click', e=>{
+			navigator.clipboard.writeText(clr);
+			alert('copied!');
+		});
+		
 		container.appendChild(block);
 	});
 	
