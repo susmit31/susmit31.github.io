@@ -1,0 +1,32 @@
+$fs-default: 1.2rem; 
+
+body{
+	margin:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	*{
+		box-sizing:border-box;
+		font-size:$fs-default;
+	}
+}
+
+
+div{
+	&:not(.container){
+		width: 25vw;
+		height: 25vw;
+		border-radius:10px;
+		margin-right:1vw;
+	}
+	&.container{
+		width:90vw;
+		height:90vh;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		flex-wrap:wrap;
+		padding:2vw;
+		border:1px solid red;
+	}
+}

@@ -1,9 +1,9 @@
 @function nav-gradient($clr){
-	@return linear-gradient(lighten($clr,5%), darken($clr,5%));
+	@return linear-gradient(color.scale($clr,$lightness:16%), color.scale($clr,$lightness:-15%));
 }
 
 @function jumbo-gradient($clr){
-	@return linear-gradient(darken($clr,2%), lighten($clr,5%));
+	@return linear-gradient(color.scale($clr,$lightness:-15%), color.scale($clr,$lightness:5%));
 }
 
 @function font-clr($clr){

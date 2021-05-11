@@ -29,7 +29,7 @@ code {
 .jumbotron {
   margin: 0px auto;
   padding: 70px 10vw 50px 5vw;
-  background: linear-gradient(#760076, #9a009a);
+  background: linear-gradient(#6d006d, #930093);
   color: white;
   position: relative;
   display: flex;
@@ -39,7 +39,7 @@ code {
   font-weight: bold;
 }
 nav {
-  background: linear-gradient(#9a009a, #670067);
+  background: linear-gradient(#bd00bd, #6d006d);
   min-height: 30px;
   font-size: 0.96rem;
   box-shadow: 0 0 15px #340034;
