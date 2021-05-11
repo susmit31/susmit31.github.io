@@ -45,7 +45,7 @@ const decimal_to_hex = num=>{
 
 
 const rgb_to_hex = (r,g,b) => {
-	let hexes = [r,g,b].map(c=>decimal_to_hex(c)).map(c=> c.length<2?'0'+c:c);
+	let hexes = [r,g,b].map(c=>c.toString(16).toUpperCase()).map(c=> c.length<2?'0'+c:c);
 	let [r_,g_,b_] = hexes;
 	return `#${r_}${g_}${b_}`;
 }
