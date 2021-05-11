@@ -11,7 +11,7 @@ const clr_fam = {
 	greens:[
 		'lawngreen','lime',
 		'limegreen', 'mediumseagreen', 'yellowgreen',
-		'springgreen', 'palegreen', 'lightgreen'
+		'springgreen', 'palegreen'
 	],
 	blues: [
 		'purple', 'dodgerblue', 'blueviolet', 
@@ -21,6 +21,7 @@ const clr_fam = {
 	reds: [
 		'tomato', 'peru', 'orangered',
 		'lightcoral', 'lightsalmon', 'orange',
+		'orchid',
 	]
 };
 
@@ -82,6 +83,7 @@ for (family in clr_fam){
 		block.appendChild(textContainer);
 		block.addEventListener('click', e=>{
 			console.log(hexclr);
+			
 			navigator.clipboard.writeText(hexclr);
 			alert('copied!');
 		});
