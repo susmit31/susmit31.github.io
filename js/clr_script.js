@@ -50,6 +50,31 @@ const rgb_to_hex = (r,g,b) => {
 	return `#${r_}${g_}${b_}`;
 }
 
+
+const addHoverText = (newBlock)=>{
+	let hexclr = window.getComputedStyle(newBlock).backgroundColor;
+	hexclr = hexclr.slice(4,)
+				.split(',')
+				.map(a=>a.replace(')',''))
+				.map(a=>parseInt(a));
+	hexclr = rgb_to_hex(...hexclr);
+	let textContainer = document.createElement('div');
+	let text = document.createElement('p');
+	
+	text.textContent = `${hexclr}\n(click to copy)`;
+	text.style.display='inline';
+	text.style.overflowWrap = 'break-word';
+	text.classList.add('text');
+	
+	textContainer.appendChild(text)
+	newBlock.appendChild(textContainer);
+	newBlock.addEventListener('click', e=>{
+		navigator.clipboard.writeText(hexclr);
+		alert('copied!');
+	});
+		
+}
+
 let count = 0;
 for (family in clr_fam){
 	let container = document.createElement('div');
@@ -65,29 +90,22 @@ for (family in clr_fam){
 		block.classList.add(family);
 		container.appendChild(block);
 		
-		let textContainer = document.createElement('div');
-		let text = document.createElement('p');
-		
-		let hexclr = window.getComputedStyle(block).backgroundColor;
-		hexclr = hexclr.slice(3,).split(',');
-		hexclr = hexclr.map(a=>a.replace('(','').replace(')',''));
-		hexclr = hexclr.map(a=>parseInt(a));
-		hexclr = rgb_to_hex(...hexclr);
-		
-		text.textContent = `${hexclr}\n(click to copy)`;
-		text.style.display='inline';
-		text.style.overflowWrap = 'break-word';
-		text.classList.add('text');
-		
-		textContainer.appendChild(text)
-		block.appendChild(textContainer);
-		block.addEventListener('click', e=>{
-			console.log(hexclr);
-			
-			navigator.clipboard.writeText(hexclr);
-			alert('copied!');
-		});
+		addHoverText(block);
 		
 	});
 	
+}
+
+const displayFromInput = ()=>{
+	let input = document.querySelector('input').value;
+	let newBlock = document.createElement('div');
+	newBlock.style.backgroundColor = input;
+	const input_container = document.querySelector('div.container');
+	let prevBlock = input_container.children[input_container.children.length-1];
+	if (prevBlock.nodeName!='BR') {
+		input_container.removeChild(prevBlock);
+	}
+	input_container.appendChild(newBlock);
+	
+	addHoverText(newBlock);		
 }

@@ -4,6 +4,7 @@ $ff-primary: 'Open Sans';
 body{
 	margin:0;
 	display:flex;
+	flex-direction:column;
 	justify-content:center;
 	align-items:center;
 	*{
@@ -22,6 +23,7 @@ div{
 		margin-bottom:3vw;
 		transition: all 300ms ease-in-out;
 		position:relative;
+		display:flex;
 		
 		.text{
 			font-size:.8em;
@@ -58,8 +60,18 @@ div{
 		h1{
 			width:100%;
 		}
+		
+		.input{
+			height:30px;
+			width: 50vw;
+		}
+
+		.btn{
+			height:30px;
+			min-width:20vw;
+			padding:0 1vw;
+		}
 	}
-	
 }
 
 @media screen and (min-width:768px){

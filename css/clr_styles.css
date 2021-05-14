@@ -1,6 +1,7 @@
 body {
   margin: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -18,6 +19,7 @@ div:not(.target, .container) {
   margin-bottom: 3vw;
   transition: all 300ms ease-in-out;
   position: relative;
+  display: flex;
 }
 div:not(.target, .container) .text {
   font-size: 0.8em;
@@ -51,6 +53,15 @@ div.container {
 }
 div.container h1 {
   width: 100%;
+}
+div.container .input {
+  height: 30px;
+  width: 50vw;
+}
+div.container .btn {
+  height: 30px;
+  min-width: 20vw;
+  padding: 0 1vw;
 }
 
 @media screen and (min-width: 768px) {
