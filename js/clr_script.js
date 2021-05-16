@@ -43,6 +43,35 @@ const decimal_to_hex = num=>{
 	}
 }
 
+const is_touch_device = ()=>'ontouchstart' in window;
+
+
+const apply_class_on_hover = (ele, cls)=>{
+	if (ele){
+		ele.addEventListener('mouseenter', e=>{
+			e.target.classList.add(cls);
+			console.log(`${e.target.nodeName} hi`);
+			e.target.addEventListener('mouseleave', e=>{
+				e.target.classList.remove(cls);
+				console.log(`${e.target.nodeName} bye`);
+			});
+		});
+	}
+}
+
+const apply_mobile_class = (ele, cls)=>{
+	if(is_touch_device()){
+		ele.addEventListener('click', e=>{
+			let prevSel = document.querySelector('.mob-click');
+			if (prevSel) {
+				prevSel.classList.remove('mob-click');
+				prevSel.classList.remove('block-hover');
+			}
+			e.target.classList.add('block-hover');
+			e.target.classList.add('mob-click');
+		});
+	}
+};
 
 const rgb_to_hex = (r,g,b) => {
 	let hexes = [r,g,b].map(c=>c.toString(16).toUpperCase()).map(c=> c.length<2?'0'+c:c);
@@ -58,19 +87,25 @@ const addHoverText = (newBlock)=>{
 				.map(a=>a.replace(')',''))
 				.map(a=>parseInt(a));
 	hexclr = rgb_to_hex(...hexclr);
+	
 	let textContainer = document.createElement('div');
-	let text = document.createElement('p');
+	textContainer.classList.add('text');
 	
-	text.textContent = `${hexclr}\n(click to copy)`;
-	text.style.display='inline';
-	text.style.overflowWrap = 'break-word';
-	text.classList.add('text');
+	let text1 = document.createElement('div');
+	text1.innerHTML = `<p>Copy ${hexclr}</p>`;
+	text1.classList.add('text-top');
 	
-	textContainer.appendChild(text)
+	let text2 = document.createElement('div');
+	text2.innerHTML = `<p>Make palette</p>`;
+	text2.classList.add('text-bottom');
+	
+	textContainer.appendChild(text1);
+	textContainer.appendChild(text2);
 	newBlock.appendChild(textContainer);
-	newBlock.addEventListener('click', e=>{
+	//apply_class_on_hover(textContainer, 'text-hover');
+	text1.addEventListener('click', e=>{
 		navigator.clipboard.writeText(hexclr);
-		alert('copied!');
+		alert(`copied ${hexclr}!`);
 	});
 		
 }
@@ -92,6 +127,8 @@ for (family in clr_fam){
 		
 		addHoverText(block);
 		
+		apply_class_on_hover(block,'block-hover');
+		apply_mobile_class(block);
 	});
 	
 }
@@ -110,3 +147,5 @@ const displayFromInput = ()=>{
 	
 	addHoverText(newBlock);		
 }
+
+//console.log(is_touch_device());
