@@ -145,7 +145,9 @@ const displayFromInput = ()=>{
 	}
 	input_container.appendChild(newBlock);
 	
-	addHoverText(newBlock);		
+	addHoverText(newBlock);
+	apply_class_on_hover(newBlock,'block-hover');
+	apply_mobile_class(newBlock);
 }
 
 //console.log(is_touch_device());
