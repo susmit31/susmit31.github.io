@@ -100,9 +100,10 @@ const displayFromInput = ()=>{
 	let input = document.querySelector('input').value;
 	let newBlock = document.createElement('div');
 	newBlock.style.backgroundColor = input;
+	newBlock.classList.add('from-input');
 	const input_container = document.querySelector('div.container');
 	let prevBlock = input_container.children[input_container.children.length-1];
-	if (prevBlock.nodeName!='BR') {
+	if (prevBlock.nodeName!=='BR') {
 		input_container.removeChild(prevBlock);
 	}
 	input_container.appendChild(newBlock);

@@ -70,6 +70,7 @@ div{
 			height:30px;
 			min-width:20vw;
 			padding:0 1vw;
+			margin: 2vw 4vw;
 		}
 	}
 }
@@ -82,6 +83,10 @@ div{
 		&:hover{
 			width:16.5vw;
 			height:16.5vw;
+		}
+		
+		&.from-input{
+			margin-top:3vw;
 		}
 	}
 }
