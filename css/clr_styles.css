@@ -40,7 +40,7 @@ div:not(.target, .container) .text-top {
   min-width: 15vw;
   max-height: 3em;
   position: fixed;
-  top: 90vh;
+  top: 85vh;
   left: 5vw;
 }
 div:not(.target, .container) .text-bottom {
@@ -49,7 +49,7 @@ div:not(.target, .container) .text-bottom {
   background: rgba(0, 0, 0, 0.4);
   cursor: pointer;
   position: fixed;
-  top: 90vh;
+  top: 85vh;
   right: 5vw;
 }
 div:not(.target, .container).block-hover .text, div:not(.target, .container).block-hover .text-top, div:not(.target, .container).block-hover .text-bottom {
