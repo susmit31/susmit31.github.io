@@ -47,7 +47,7 @@ const is_touch_device = ()=>'ontouchstart' in window;
 
 
 const apply_class_on_hover = (ele, cls)=>{
-	if (ele){
+	if (!is_touch_device()){
 		ele.addEventListener('mouseenter', e=>{
 			e.target.classList.add(cls);
 			console.log(`${e.target.nodeName} hi`);
