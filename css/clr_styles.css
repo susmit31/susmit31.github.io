@@ -113,6 +113,7 @@ div.modal .container div {
 }
 div.modal .cross {
   position: absolute;
+  opacity: 0.8;
   top: 0;
   right: 1vw;
   font-size: 1.2rem;

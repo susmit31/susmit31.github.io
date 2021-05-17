@@ -178,8 +178,8 @@ const make_palette = (r,g,b)=>{
 	
 	for (let i=0; i<3; i++){
 		let clr = [...hsl];
-		clr[2] -= delta_l*i;
-		clr[1] -= delta_s*i;
+		clr[2] -= delta_l*i*Math.pow(-1,i);
+		clr[1] -= delta_s*i*Math.pow(-1,i);
 		palette.push(clr);
 	}
 	
