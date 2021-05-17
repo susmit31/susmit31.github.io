@@ -171,21 +171,35 @@ const hsl_to_rgb = (h,s,l)=>{
 
 
 const make_palette = (r,g,b)=>{
-	const PALETTE_SIZE = 5;
 	let [h,s,l] = rgb_to_hsl(r,g,b);
+	let ltness = lightness_cat(l);
+	
+	const PALETTE_SIZE = 5;
 	let palette = [];
-	let delta_l = l>20? l/(PALETTE_SIZE+1): 15;
-	let delta_s = s>20? s/(PALETTE_SIZE+2): 10;
+	let delta_l = 20;
+	let delta_s = 15;
+	let delta_h = 5;
 	
-	for (let i=0; i<PALETTE_SIZE; i++){
-		let clr = [h,s,l];
-		let minus = l<40? 1: l<50? 1.5*Math.pow(-1,i): -1.2; 
-		clr[2] += delta_l*i*minus;
-		clr[1] += delta_s*i*minus;
-		palette.push(clr);
-	}
-	
-	return palette;
+	for (let i=0; i<PALETTE_SIZE - ltness; i++)
+		palette.push([h + i*delta_h, s + i*delta_s, l + i*delta_s]);
+	for(let i=1;i<ltness+1;i++)
+		palette.push([h - i*delta_h, s - i*delta_s, l - i*delta_l]);
+	palette.sort((a,b)=>{
+		return -(a[0]-b[0]
+			+ a[1] - b[1]
+			+ a[2] - b[2])
+	});
+	return palette.map(hsl=>{
+		let [h,s,l] = hsl;
+		return l<20?[h,s,l+10]:[h,s,l]});
+}
+
+const lightness_cat = l => {
+	if (l<=20) return 0
+	else if (l<=40) return 1
+	else if (l<=60) return 2
+	else if (l<=80) return 3
+	else return 4
 }
 
 const display_palette = palette => {
