@@ -173,8 +173,8 @@ const hsl_to_rgb = (h,s,l)=>{
 const make_palette = (r,g,b)=>{
 	let [h,s,l] = rgb_to_hsl(r,g,b);
 	let palette = [];
-	let delta_l = l? l/5: 10;
-	let delta_s = s? s/3: 10;
+	let delta_l = l>20? l/5: 15;
+	let delta_s = s>20? s/3: 15;
 	
 	for (let i=0; i<3; i++){
 		let clr = [h,s,l];
