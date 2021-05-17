@@ -15,7 +15,7 @@ body{
 }
 
 div{
-	&:not(.target, .container){
+	&:not(.target, .container, .cross){
 		width: 25vw;
 		height: 25vw;
 		border-radius:10px;
@@ -75,6 +75,7 @@ div{
 			}
 		}		
 	}
+	
 	&.container{
 		width:90vw;
 		display:flex;
@@ -99,10 +100,52 @@ div{
 			margin: 2vw 4vw;
 		}
 	}
+	
+	&.modal{
+		width:100vw;
+		height:100vh;
+		position:fixed;
+		top:0;
+		left:0;
+		background-color:rgba(black,.3);
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		
+		.container{
+			min-height:40vh;
+			width:95vw;
+			background-color:white;
+			position:relative;
+			display:flex;
+			align-items:center;
+			
+			div:last-child{
+				margin-right:0
+			}
+			
+			div{
+				margin-top:2vh;
+				margin-bottom:2vh;
+			}
+		}
+		.cross{
+			position:absolute;
+			top:0;
+			right:1vw;
+			font-size:$fs-default;
+			margin:0;
+			background-color:rgba(black,.8);
+			color:white;
+			cursor:pointer;
+			padding:clamp(1px, 2vw, 10px);
+			border-radius:5px;
+		}
+	}
 }
 
 @media screen and (min-width:768px){
-	div:not(.container, .target){
+	div:not(.container, .target, .modal, .cross){
 		width:15vw;
 		height:15vw;
 		
@@ -116,5 +159,3 @@ div{
 		}
 	}
 }
-
-

@@ -21,11 +21,11 @@ const clr_fam = {
 	reds: [
 		'tomato', 'peru', 'orangered',
 		'lightcoral', 'lightsalmon', 'orange',
-		'orchid',
+		'orchid'
 	]
 };
 
-let target = document.querySelector('.target');
+const IS_TOUCH_DEVICE = 'ontouchstart' in window;
 
 const decimal_to_hex = num=>{
 	if (num<16){
@@ -43,7 +43,6 @@ const decimal_to_hex = num=>{
 	}
 }
 
-const IS_TOUCH_DEVICE = 'ontouchstart' in window;
 
 const apply_hover_class = (ele, cls)=>{
 	if (!IS_TOUCH_DEVICE){
@@ -78,12 +77,13 @@ const rgb_to_hex = (r,g,b) => {
 
 
 const add_hover_text = (newBlock)=>{
-	let hexclr = window.getComputedStyle(newBlock).backgroundColor;
-	hexclr = hexclr.slice(4,)
+	let bgclr = window.getComputedStyle(newBlock).backgroundColor;
+	let rgb = bgclr.slice(4,)
 				.split(',')
 				.map(a=>a.replace(')',''))
 				.map(a=>parseInt(a));
-	hexclr = rgb_to_hex(...hexclr);
+				
+	let hexclr = rgb_to_hex(...rgb);
 	
 	let textContainer = document.createElement('div');
 	textContainer.classList.add('text-container');
@@ -102,7 +102,7 @@ const add_hover_text = (newBlock)=>{
 	text2.classList.add('text-box');
 	text2.classList.add('palette');
 	text2.addEventListener('click', e=>{
-		const palette = make_palette(hexclr);
+		const palette = make_palette(...rgb);
 		display_palette(palette);
 	});
 	
@@ -111,20 +111,108 @@ const add_hover_text = (newBlock)=>{
 	newBlock.appendChild(textContainer);		
 }
 
-let count = 0;
-for (family in clr_fam){
+
+const rgb_to_hsl = (r,g,b)=>{
+	r/=255; g/=255; b/=255;
+	
+	let cmin = Math.min(r,g,b),
+		cmax = Math.max(r,g,b),
+		delta = cmax - cmin,
+		h=0, s=0, l=0;
+		
+	if (delta==0) 
+		h=0;
+	else if (cmax==r)
+		h = ((g-b)/delta)%6;
+	else if (cmax==g)
+		h = ((b-r)/delta) + 2;
+	else
+		h = ((r-g)/delta) + 4;
+	
+	h = Math.round(h*60);
+	
+	if (h < 0)
+		h += 360;
+	
+	l = (cmax + cmin) / 2;
+	
+	s = delta==0? 0 : delta / (1 - Math.abs(2*l - 1));
+	
+	s = +(s * 100);
+	l = +(l * 100);
+	
+	return [h,s,l]
+}
+
+const hsl_to_rgb = (h,s,l)=>{
+	h /= 360; s /= 100; l/=100;
+	let r,g,b;
+	
+	if (s==0) r = g = b = l;
+	else{
+		const hue2rgb = (p,q,t)=>{
+			if(t < 0) t += 1;
+            if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+		}
+		
+		var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+	}
+	
+	return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+
+const make_palette = (r,g,b)=>{
+	let hsl = rgb_to_hsl(r,g,b);
+	let palette = [];
+	let delta_l = hsl[2]/3;
+	let delta_s = hsl[1]/5;
+	
+	for (let i=0; i<3; i++){
+		let clr = [...hsl];
+		clr[2] -= delta_l*i;
+		clr[1] -= delta_s*i;
+		palette.push(clr);
+	}
+	
+	return palette;
+}
+
+const display_palette = palette => {
+	let modal = document.createElement('div');
+	modal.classList.add('modal');
+	
 	let container = document.createElement('div');
 	container.classList.add('container');
-	let heading = document.createElement('h1');
-	heading.textContent = family;
-	container.appendChild(heading);
-	target.appendChild(container);
 	
-	clr_fam[family].forEach(clr=>{
+	let cross = document.createElement('div');
+	cross.innerHTML = 'x';
+	cross.classList.add('cross');
+	
+	cross.addEventListener('click', e=>{
+		document.querySelector('body').removeChild(modal);
+	})
+	
+	container.appendChild(cross);
+	
+	modal.appendChild(container);
+	document.querySelector('body').appendChild(modal);
+	
+	palette.forEach(clr=>{
+		let [h,s,l] = clr;
+		let [r,g,b] = hsl_to_rgb(h,s,l);
 		let block = document.createElement('div');
-		block.style.backgroundColor = clr;
-		block.classList.add(family);
+		block.style.backgroundColor = `rgb(${r},${g},${b})`;
 		container.appendChild(block);
+		
 		
 		add_hover_text(block);
 		
@@ -149,4 +237,30 @@ const display_from_input = ()=>{
 	add_hover_text(newBlock);
 	apply_hover_class(newBlock,'block-hover');
 	apply_mobile_class(newBlock);
+}
+
+
+
+let target = document.querySelector('.target');
+let count = 0;
+for (family in clr_fam){
+	let container = document.createElement('div');
+	container.classList.add('container');
+	let heading = document.createElement('h1');
+	heading.textContent = family;
+	container.appendChild(heading);
+	target.appendChild(container);
+	
+	clr_fam[family].forEach(clr=>{
+		let block = document.createElement('div');
+		block.style.backgroundColor = clr;
+		block.classList.add(family);
+		container.appendChild(block);
+		
+		add_hover_text(block);
+		
+		apply_hover_class(block,'block-hover');
+		apply_mobile_class(block);
+	});
+	
 }

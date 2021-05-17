@@ -11,7 +11,7 @@ body * {
   font-family: "Open Sans";
 }
 
-div:not(.target, .container) {
+div:not(.target, .container, .cross) {
   width: 25vw;
   height: 25vw;
   border-radius: 10px;
@@ -20,7 +20,7 @@ div:not(.target, .container) {
   transition: all 300ms ease-in-out;
   display: flex;
 }
-div:not(.target, .container) .text-container, div:not(.target, .container) .text-box {
+div:not(.target, .container, .cross) .text-container, div:not(.target, .container, .cross) .text-box {
   opacity: 0;
   color: white;
   padding: 0 0.25em;
@@ -35,7 +35,7 @@ div:not(.target, .container) .text-container, div:not(.target, .container) .text
   max-width: 90%;
   max-height: 80%;
 }
-div:not(.target, .container) .text-box {
+div:not(.target, .container, .cross) .text-box {
   background: rgba(0, 0, 0, 0.4);
   max-height: 48%;
   padding: 0;
@@ -43,22 +43,22 @@ div:not(.target, .container) .text-box {
   position: fixed;
   bottom: 5vh;
 }
-div:not(.target, .container) .text-box.copy {
+div:not(.target, .container, .cross) .text-box.copy {
   left: 5vw;
 }
-div:not(.target, .container) .text-box.palette {
+div:not(.target, .container, .cross) .text-box.palette {
   right: 5vw;
 }
-div:not(.target, .container).block-hover .text-container, div:not(.target, .container).block-hover .text-box {
+div:not(.target, .container, .cross).block-hover .text-container, div:not(.target, .container, .cross).block-hover .text-box {
   margin: auto;
   opacity: 1;
   z-index: 1;
   display: flex;
 }
-div:not(.target, .container).block-hover .text-container *, div:not(.target, .container).block-hover .text-box * {
+div:not(.target, .container, .cross).block-hover .text-container *, div:not(.target, .container, .cross).block-hover .text-box * {
   position: static;
 }
-div:not(.target, .container).block-hover.mob-click .text-container *, div:not(.target, .container).block-hover.mob-click .text-box * {
+div:not(.target, .container, .cross).block-hover.mob-click .text-container *, div:not(.target, .container, .cross).block-hover.mob-click .text-box * {
   position: fixed;
   font-size: 0.9em;
   padding: 1em;
@@ -85,17 +85,55 @@ div.container .btn {
   padding: 0 1vw;
   margin: 2vw 4vw;
 }
+div.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.modal .container {
+  min-height: 40vh;
+  width: 95vw;
+  background-color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+div.modal .container div:last-child {
+  margin-right: 0;
+}
+div.modal .container div {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+div.modal .cross {
+  position: absolute;
+  top: 0;
+  right: 1vw;
+  font-size: 1.2rem;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  cursor: pointer;
+  padding: clamp(1px, 2vw, 10px);
+  border-radius: 5px;
+}
 
 @media screen and (min-width: 768px) {
-  div:not(.container, .target) {
+  div:not(.container, .target, .modal, .cross) {
     width: 15vw;
     height: 15vw;
   }
-  div:not(.container, .target):is(.copy, .palette) {
+  div:not(.container, .target, .modal, .cross):is(.copy, .palette) {
     padding: 1em;
     position: static;
   }
-  div:not(.container, .target).from-input {
+  div:not(.container, .target, .modal, .cross).from-input {
     margin-top: 3vw;
   }
 }
