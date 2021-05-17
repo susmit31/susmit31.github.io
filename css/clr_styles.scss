@@ -84,6 +84,10 @@ div{
 		flex-wrap:wrap;
 		padding:2vw;
 		
+		&>div{
+			border:1.5px solid black;
+		}
+		
 		h1{
 			width:100%;
 		}

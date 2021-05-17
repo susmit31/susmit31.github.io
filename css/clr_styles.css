@@ -72,6 +72,9 @@ div.container {
   flex-wrap: wrap;
   padding: 2vw;
 }
+div.container > div {
+  border: 1.5px solid black;
+}
 div.container h1 {
   width: 100%;
 }
