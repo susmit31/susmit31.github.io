@@ -73,7 +73,7 @@ div.container {
   padding: 2vw;
 }
 div.container > div {
-  box-shadow: 1.5px 5px 5px #404040;
+  box-shadow: 1.5px 3.5px 5px #404040;
 }
 div.container h1 {
   width: 100%;
@@ -119,7 +119,7 @@ div.modal .cross {
   opacity: 0.8;
   top: 0;
   right: 1vw;
-  font-size: 1.2rem;
+  font-size: 0.8em;
   margin: 0;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;

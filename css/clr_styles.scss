@@ -85,7 +85,7 @@ div{
 		padding:2vw;
 		
 		&>div{
-			box-shadow: 1.5px 5px 5px lighten(black,25%);
+			box-shadow: 1.5px 3.5px 5px lighten(black,25%);
 		}
 		
 		h1{
@@ -138,7 +138,7 @@ div{
 			opacity:.8;
 			top:0;
 			right:1vw;
-			font-size:$fs-default;
+			font-size:.8em;
 			margin:0;
 			background-color:rgba(black,.8);
 			color:white;
