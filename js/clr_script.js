@@ -43,24 +43,21 @@ const decimal_to_hex = num=>{
 	}
 }
 
-const is_touch_device = ()=>'ontouchstart' in window;
+const IS_TOUCH_DEVICE = 'ontouchstart' in window;
 
-
-const apply_class_on_hover = (ele, cls)=>{
-	if (!is_touch_device()){
+const apply_hover_class = (ele, cls)=>{
+	if (!IS_TOUCH_DEVICE){
 		ele.addEventListener('mouseenter', e=>{
 			e.target.classList.add(cls);
-			console.log(`${e.target.nodeName} hi`);
 			e.target.addEventListener('mouseleave', e=>{
 				e.target.classList.remove(cls);
-				console.log(`${e.target.nodeName} bye`);
 			});
 		});
 	}
 }
 
 const apply_mobile_class = (ele, cls)=>{
-	if(is_touch_device()){
+	if(IS_TOUCH_DEVICE){
 		ele.addEventListener('click', e=>{
 			let prevSel = document.querySelector('.mob-click');
 			if (prevSel) {
@@ -80,7 +77,7 @@ const rgb_to_hex = (r,g,b) => {
 }
 
 
-const addHoverText = (newBlock)=>{
+const add_hover_text = (newBlock)=>{
 	let hexclr = window.getComputedStyle(newBlock).backgroundColor;
 	hexclr = hexclr.slice(4,)
 				.split(',')
@@ -89,25 +86,29 @@ const addHoverText = (newBlock)=>{
 	hexclr = rgb_to_hex(...hexclr);
 	
 	let textContainer = document.createElement('div');
-	textContainer.classList.add('text');
+	textContainer.classList.add('text-container');
 	
 	let text1 = document.createElement('div');
 	text1.innerHTML = `<p>Copy ${hexclr}</p>`;
-	text1.classList.add('text-top');
-	
-	let text2 = document.createElement('div');
-	text2.innerHTML = `<p>Make palette</p>`;
-	text2.classList.add('text-bottom');
-	
-	textContainer.appendChild(text1);
-	textContainer.appendChild(text2);
-	newBlock.appendChild(textContainer);
-	//apply_class_on_hover(textContainer, 'text-hover');
+	text1.classList.add('text-box');
+	text1.classList.add('copy');
 	text1.addEventListener('click', e=>{
 		navigator.clipboard.writeText(hexclr);
 		alert(`copied ${hexclr}!`);
 	});
-		
+	
+	let text2 = document.createElement('div');
+	text2.innerHTML = `<p>Make palette</p>`;
+	text2.classList.add('text-box');
+	text2.classList.add('palette');
+	text2.addEventListener('click', e=>{
+		const palette = make_palette(hexclr);
+		display_palette(palette);
+	});
+	
+	textContainer.appendChild(text1);
+	textContainer.appendChild(text2);
+	newBlock.appendChild(textContainer);		
 }
 
 let count = 0;
@@ -125,15 +126,15 @@ for (family in clr_fam){
 		block.classList.add(family);
 		container.appendChild(block);
 		
-		addHoverText(block);
+		add_hover_text(block);
 		
-		apply_class_on_hover(block,'block-hover');
+		apply_hover_class(block,'block-hover');
 		apply_mobile_class(block);
 	});
 	
 }
 
-const displayFromInput = ()=>{
+const display_from_input = ()=>{
 	let input = document.querySelector('input').value;
 	let newBlock = document.createElement('div');
 	newBlock.style.backgroundColor = input;
@@ -145,9 +146,7 @@ const displayFromInput = ()=>{
 	}
 	input_container.appendChild(newBlock);
 	
-	addHoverText(newBlock);
-	apply_class_on_hover(newBlock,'block-hover');
+	add_hover_text(newBlock);
+	apply_hover_class(newBlock,'block-hover');
 	apply_mobile_class(newBlock);
 }
-
-//console.log(is_touch_device());

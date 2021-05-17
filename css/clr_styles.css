@@ -20,7 +20,7 @@ div:not(.target, .container) {
   transition: all 300ms ease-in-out;
   display: flex;
 }
-div:not(.target, .container) .text, div:not(.target, .container) .text-bottom, div:not(.target, .container) .text-top {
+div:not(.target, .container) .text-container, div:not(.target, .container) .text-box {
   opacity: 0;
   color: white;
   padding: 0 0.25em;
@@ -32,49 +32,37 @@ div:not(.target, .container) .text, div:not(.target, .container) .text-bottom, d
   justify-content: center;
   text-align: center;
   display: none;
+  max-width: 90%;
+  max-height: 80%;
 }
-div:not(.target, .container) .text-top {
+div:not(.target, .container) .text-box {
   background: rgba(0, 0, 0, 0.4);
+  max-height: 48%;
   padding: 0;
   cursor: pointer;
-  min-width: 15vw;
-  max-height: 3em;
   position: fixed;
   bottom: 5vh;
+}
+div:not(.target, .container) .text-box.copy {
   left: 5vw;
 }
-div:not(.target, .container) .text-bottom {
-  min-width: 15vw;
-  max-height: 3em;
-  background: rgba(0, 0, 0, 0.4);
-  cursor: pointer;
-  position: fixed;
-  bottom: 5vh;
+div:not(.target, .container) .text-box.palette {
   right: 5vw;
 }
-div:not(.target, .container).block-hover .text, div:not(.target, .container).block-hover .text-top, div:not(.target, .container).block-hover .text-bottom {
+div:not(.target, .container).block-hover .text-container, div:not(.target, .container).block-hover .text-box {
   margin: auto;
   opacity: 1;
   z-index: 1;
   display: flex;
 }
-div:not(.target, .container).block-hover .text *, div:not(.target, .container).block-hover .text-top *, div:not(.target, .container).block-hover .text-bottom * {
+div:not(.target, .container).block-hover .text-container *, div:not(.target, .container).block-hover .text-box * {
   position: static;
 }
-div:not(.target, .container).block-hover.mob-click .text *, div:not(.target, .container).block-hover.mob-click .text-top *, div:not(.target, .container).block-hover.mob-click .text-bottom * {
+div:not(.target, .container).block-hover.mob-click .text-container *, div:not(.target, .container).block-hover.mob-click .text-box * {
   position: fixed;
   font-size: 0.9em;
   padding: 1em;
   width: 25vw;
-}
-div:not(.target, .container).text-hover {
-  margin: auto;
-  opacity: 1;
-  z-index: 1;
-  display: flex;
-}
-div:not(.target, .container).text-hover * {
-  position: static;
 }
 div.container {
   width: 90vw;
@@ -103,16 +91,12 @@ div.container .btn {
     width: 15vw;
     height: 15vw;
   }
-  div:not(.container, .target):is(.text-top, .text-bottom) {
+  div:not(.container, .target):is(.copy, .palette) {
     padding: 1em;
+    position: static;
   }
   div:not(.container, .target).from-input {
     margin-top: 3vw;
-  }
-}
-@media screen and (min-width: 800px) {
-  :not(.container, .target):is(.text-top,.text-bottom) {
-    position: static;
   }
 }
 
