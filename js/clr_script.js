@@ -171,12 +171,13 @@ const hsl_to_rgb = (h,s,l)=>{
 
 
 const make_palette = (r,g,b)=>{
+	const PALETTE_SIZE = 5;
 	let [h,s,l] = rgb_to_hsl(r,g,b);
 	let palette = [];
-	let delta_l = l>20? l/5: 15;
-	let delta_s = s>20? s/5: 15;
+	let delta_l = l>20? l/(PALETTE_SIZE+2): 15;
+	let delta_s = s>20? s/(PALETTE_SIZE+2): 15;
 	
-	for (let i=0; i<5; i++){
+	for (let i=0; i<PALETTE_SIZE; i++){
 		let clr = [h,s,l];
 		let minus = l<40? 1: -1; 
 		clr[2] += delta_l*i*minus;
