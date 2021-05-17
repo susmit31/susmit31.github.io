@@ -73,7 +73,7 @@ div.container {
   padding: 2vw;
 }
 div.container > div {
-  box-shadow: 0px 3.5px 5px #404040;
+  box-shadow: 1px 2px 1px #404040;
 }
 div.container h1 {
   width: 100%;
