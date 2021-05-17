@@ -173,13 +173,13 @@ const hsl_to_rgb = (h,s,l)=>{
 const make_palette = (r,g,b)=>{
 	let hsl = rgb_to_hsl(r,g,b);
 	let palette = [];
-	let delta_l = hsl[2]/3;
-	let delta_s = hsl[1]/5;
+	let delta_l = hsl[2]/5;
+	let delta_s = hsl[1]/3;
 	
 	for (let i=0; i<3; i++){
 		let clr = [...hsl];
-		clr[2] -= delta_l*i*Math.pow(-1,i);
-		clr[1] -= delta_s*i*Math.pow(-1,i);
+		clr[2] += delta_l*i*Math.pow(-1,i);
+		clr[1] += delta_s*i*Math.pow(-1,i);
 		palette.push(clr);
 	}
 	
