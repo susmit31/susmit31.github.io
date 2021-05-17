@@ -85,7 +85,7 @@ div{
 		padding:2vw;
 		
 		&>div{
-			border:1.5px solid black;
+			box-shadow: 1.5px 5px 5px lighten(black,25%);
 		}
 		
 		h1{

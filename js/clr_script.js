@@ -179,7 +179,7 @@ const make_palette = (r,g,b)=>{
 	
 	for (let i=0; i<PALETTE_SIZE; i++){
 		let clr = [h,s,l];
-		let minus = l<40? 1: l<60? 1.5*Math.pow(-1,i): -1; 
+		let minus = l<40? 1: l<50? 1.5*Math.pow(-1,i): -1.2; 
 		clr[2] += delta_l*i*minus;
 		clr[1] += delta_s*i*minus;
 		palette.push(clr);
