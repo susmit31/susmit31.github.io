@@ -174,11 +174,11 @@ const make_palette = (r,g,b)=>{
 	let [h,s,l] = rgb_to_hsl(r,g,b);
 	let palette = [];
 	let delta_l = l>20? l/5: 15;
-	let delta_s = s>20? s/3: 15;
+	let delta_s = s>20? s/5: 15;
 	
-	for (let i=0; i<3; i++){
+	for (let i=0; i<5; i++){
 		let clr = [h,s,l];
-		let minus = l<40? 1: l<80? Math.pow(-1,i): -1; 
+		let minus = l<40? 1: -1; 
 		clr[2] += delta_l*i*minus;
 		clr[1] += delta_s*i*minus;
 		palette.push(clr);
