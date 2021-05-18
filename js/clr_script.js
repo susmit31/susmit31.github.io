@@ -203,6 +203,9 @@ const lightness_cat = l => {
 }
 
 const display_palette = palette => {
+	let prevModal = document.querySelector('.modal');
+	if (prevModal) document.querySelector('body').removeChild(prevModal);
+	
 	let modal = document.createElement('div');
 	modal.classList.add('modal');
 	

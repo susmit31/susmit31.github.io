@@ -115,15 +115,13 @@ div{
 		display:flex;
 		align-items:center;
 		justify-content:center;
+		border-radius:0px;
 		
 		.container{
 			min-height:40vh;
 			width:95vw;
 			background-color:white;
 			position:relative;
-			display:flex;
-			align-items:center;
-			justify-content:center;
 			
 			&>div:last-child{
 				margin-right:0
@@ -132,6 +130,7 @@ div{
 			&>div{
 				margin-top:2vh;
 				margin-bottom:2vh;
+				//border:2px solid blue;
 			}
 		}
 		.cross{
