@@ -172,18 +172,26 @@ const hsl_to_rgb = (h,s,l)=>{
 
 const make_palette = (r,g,b)=>{
 	let [h,s,l] = rgb_to_hsl(r,g,b);
-	let ltness = lightness_cat(l);
 	
 	const PALETTE_SIZE = 5;
-	let palette = [];
-	let delta_l = 20;
-	let delta_s = 15;
-	let delta_h = 5;
+	let ltn = lightness_cat(l, PALETTE_SIZE);
+	let hue = hue_cat(h,PALETTE_SIZE);
+	let sat = saturation_cat(s,PALETTE_SIZE);
 	
-	for (let i=0; i<PALETTE_SIZE - ltness; i++)
+	let palette = [];
+	for (let i=0; i<PALETTE_SIZE - ltn; i++){
+		let delta_l = ltn<2? 20 : 20 + 5*Math.random();
+		let delta_s = sat<2? 15 : 10 + 5*Math.random();
+		let delta_h = 5*Math.random();
 		palette.push([h + i*delta_h, s + i*delta_s, l + i*delta_s]);
-	for(let i=1;i<ltness+1;i++)
+	}
+	for(let i=1;i<ltn+1;i++){
+		let delta_l = ltn<2? 20 : 20 + 5*Math.random();
+		let delta_s = sat<2? 15 : 10 + 5*Math.random();
+		let delta_h = 5*Math.random();
 		palette.push([h - i*delta_h, s - i*delta_s, l - i*delta_l]);
+	}
+	
 	palette.sort((a,b)=>{
 		return -(a[0]-b[0]
 			+ a[1] - b[1]
@@ -191,16 +199,22 @@ const make_palette = (r,g,b)=>{
 	});
 	return palette.map(hsl=>{
 		let [h,s,l] = hsl;
-		return l<20?[h,s,l+10]:[h,s,l]});
+		return l<20?[h,s,l+10]:[h,s,l]}
+	);
 }
 
-const lightness_cat = l => {
-	if (l<=20) return 0
-	else if (l<=40) return 1
-	else if (l<=60) return 2
-	else if (l<=80) return 3
-	else return 4
+const categorize = (l, l_max, num_cats) => {
+	let interval = l_max / num_cats;
+	for (let i=0; i<num_cats; i++){
+		if (l<=(i+1)*interval) return i
+	}
 }
+
+const lightness_cat = (l,num_cats)=>categorize(l,100,num_cats);
+
+const saturation_cat = (s,num_cats)=>categorize(s,100,num_cats);
+
+const hue_cat = (h,num_cats)=>categorize(h,360,num_cats);
 
 const display_palette = palette => {
 	let prevModal = document.querySelector('.modal');
