@@ -135,7 +135,7 @@ div{
 		}
 		.cross{
 			position:absolute;
-			opacity:.8;
+			opacity:.4;
 			top:0;
 			right:1vw;
 			font-size:.8em;
@@ -143,8 +143,9 @@ div{
 			background-color:rgba(black,.8);
 			color:white;
 			cursor:pointer;
-			padding:clamp(1px, 2vw, 10px);
+			padding:calc(clamp(1px, 2vw, 10px) / 5) clamp(1px, 2vw, 10px) ;
 			border-radius:5px;
+			box-shadow:none;
 		}
 	}
 }
