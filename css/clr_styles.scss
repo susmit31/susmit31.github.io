@@ -21,7 +21,7 @@ div{
 		border-radius:10px;
 		margin-right:3vw;
 		margin-bottom:3vw;
-		transition: all 300ms ease-in-out;
+		transition: all 500ms ease-in-out;
 		display:flex;
 		
 		.text-container{
@@ -119,7 +119,8 @@ div{
 		backdrop-filter:blur(5px);
 		
 		.container{
-			min-height:40vh;
+			opacity:1;
+			animation: display_modal 200ms ease-in-out;
 			width:95vw;
 			background-color:white;
 			position:relative;
@@ -131,23 +132,34 @@ div{
 			&>div{
 				margin-top:2vh;
 				margin-bottom:2vh;
-				//border:2px solid blue;
+				animation: display_modal 200ms ease-in-out;
 			}
+			
 		}
 		.cross{
 			position:absolute;
 			opacity:.4;
 			top:0;
-			right:1vw;
+			right:2vw;
 			font-size:.8em;
 			margin:0;
 			background-color:rgba(black,.8);
 			color:white;
 			cursor:pointer;
-			padding:calc(clamp(1px, 2vw, 10px) / 5) clamp(1px, 2vw, 10px) ;
+			padding:calc(clamp(1px, 2vw, 10px) / 10) clamp(1px, 2vw, 10px) ;
+			padding-bottom: calc( clamp(1px, 2vw, 10px) / 3);
 			border-radius:5px;
 			box-shadow:none;
 		}
+	}
+}
+
+@keyframes display_modal{
+	0%{
+		opacity:0;
+	}
+	100%{
+		opacity:1;
 	}
 }
 
