@@ -32,11 +32,12 @@ const startStream = async()=>{
 	streamStarted = true;
 }
 
-getCamera();
+let startButton = document.querySelector('button.start');
+startButton.onclick = ()=>getCamera();
 
-let button = document.querySelector('button')
+let stopButton = document.querySelector('button.stop')
 
-button.onclick = ()=>{
+stopButton.onclick = ()=>{
 	video.pause();
 	video.classList.add('d-none');
 	button.innerText = 'Start';
