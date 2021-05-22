@@ -1,27 +1,18 @@
 const video = document.querySelector('video');
-let streamStarted = false;
+const MAXWIDTH = window.innerWidth*.95;
 
 const constraints = {
 	video:{
 		width:{
-			max:2560
+			max:MAXWIDTH,
 		},
-		height:{
-			max:1440
-		}
 	}
 }
 
-const getCamera = async()=>{
-	if (streamStarted){
-		video.play();
-		return
-	}
-	
+const getCamera = async()=>{	
 	if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia){
 		const stream = await navigator.mediaDevices.getUserMedia(constraints);
 		video.srcObject = stream;
-		streamStarted = true;
 	}
 }
 
@@ -32,7 +23,6 @@ startButton.onclick = ()=>{
 }
 
 let stopButton = document.querySelector('button.stop')
-
 stopButton.onclick = ()=>{
 	video.pause();
 	video.classList.add('d-none');	
