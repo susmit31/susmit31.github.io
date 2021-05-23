@@ -1,4 +1,5 @@
 const video = document.querySelector('video');
+const vidParent = video.parentElement;
 const canvas = document.querySelector('canvas');
 const MAXWIDTH = window.innerWidth*.95;
 
@@ -14,6 +15,7 @@ const getCamera = async()=>{
 	if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia){
 		const stream = await navigator.mediaDevices.getUserMedia(constraints);
 		video.srcObject = stream;
+		vidParent.appendChild(video);
 	}
 	else{
 		console.log("unsupported operation")
@@ -81,6 +83,6 @@ startButton.onclick = async()=>{
 
 let stopButton = document.querySelector('button.stop')
 stopButton.onclick = ()=>{
-	video.pause();
-	canvas.classList.add("d-none");
+	video.parentElement.removeChild(video);
+	canvas.classList.add('d-none');
 }
