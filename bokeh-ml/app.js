@@ -49,11 +49,13 @@ const runModel = async(canvas, model)=>{
 	}
 }
 
+
+let model = await loadModel();
+
 let startButton = document.querySelector('button.start');
 startButton.onclick = async()=>{
 	canvas.classList.remove('d-none');
 	getCamera();
-	let model = await loadModel();
 	setInterval(()=>{
 		drawToCanvas(video,canvas);
 		runModel(canvas, model);
