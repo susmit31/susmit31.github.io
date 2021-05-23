@@ -34,18 +34,12 @@ Array.from(sqrs).forEach(c=>{
 });
 
 const drawOnDrag = e=>{
-	if (simuln!==null){
-		clearInterval(simuln);
-		console.log('hi');
-		simuln = null;
-	}
 	if (e.target.style.backgroundColor!==ACTIVE_CLR)
 		e.target.style.backgroundColor = ACTIVE_CLR;
-	else e.target.style.backgroundColor = INACTIVE_CLR;
 };
 
 game.onmousedown = (e)=>{
-	toggleLife(e.target);
+	if (!isAlive(e.target)) toggleLife(e.target);
 	Array.from(sqrs).forEach(c=>{
 		c.addEventListener('mouseenter',drawOnDrag);
 	});
