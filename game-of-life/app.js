@@ -56,10 +56,8 @@ const mobileDrawOnDrag = e=>{
 	toggleLife(document.elementFromPoint(x,y))
 }
 
-game.ontouchstart = ()=>{
-	Array.from(sqrs).forEach(c=>{
-		c.addEventListener('touchmove',mobileDrawOnDrag);
-	});
+game.ontouchstart = (e)=>{
+	e.target.addEventListener('touchmove',mobileDrawOnDrag);
 };
 
 game.onmouseup = ()=>{
@@ -68,13 +66,10 @@ game.onmouseup = ()=>{
 	})
 };
 
-game.ontouchend = ()=>{
-	Array.from(sqrs).forEach(c=>{
-		c.removeEventListener('touchmove',mobileDrawOnDrag);
-	})
+game.ontouchend = (e)=>{
+	e.target.removeEventListener('touchmove',mobileDrawOnDrag);
 };
 
-game.ontouchend
 const range = n => n==1? [0] : [...range(n-1),n-1];
 
 const findNeighbours = sqr => {
