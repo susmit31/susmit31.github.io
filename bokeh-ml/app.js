@@ -27,7 +27,7 @@ const drawToCanvas = (video,canvas)=>{
 	ctx.translate(canvas.width,0);
 	ctx.scale(-1,1);
 	ctx.drawImage(video, 0, 0);
-	runModel(model,canvas);
+	drawBoundingBox(boundingBox,canvas);
 }
 
 let model;
@@ -38,7 +38,7 @@ loadModel();
 
 
 
-const runModel = async(model,canvas)=>{
+const faceBoundingBox = async(model,canvas)=>{
 	const return_tensors = false;
 	
 	const predictions = await model.estimateFaces(video, return_tensors);
@@ -47,15 +47,21 @@ const runModel = async(model,canvas)=>{
 			const start = predictions[i].topLeft;
 			const end = predictions[i].bottomRight;
 			const size = [end[0]-start[0], end[1]-start[1]];
-			
-			let ctx = canvas.getContext('2d');
-			ctx.lineWidth = '2';
-			ctx.strokeStyle = 'tomato';
-			ctx.rect(start[0], start[1], size[0], size[1]);
-			ctx.stroke();
+			boundingBox = [start[0],start[1],size[0],size[1]]
 		}
 	}
 }
+
+const drawBoundingBox = (boundingBox, canvas)=>{
+	let ctx = canvas.getContext('2d');
+	ctx.lineWidth = '2';
+	ctx.strokeStyle = 'tomato';
+	ctx.rect(...boundingBox);
+	ctx.stroke();
+}
+
+
+let boundingBox = [0,0,0,0];
 
 
 let startButton = document.querySelector('button.start');
@@ -64,7 +70,10 @@ startButton.onclick = async()=>{
 	getCamera();
 	setInterval(()=>{
 		drawToCanvas(video,canvas);
-	},300);
+	},100);
+	setInterval(()=>{
+		faceBoundingBox(model, canvas);
+	}, 500);
 }
 
 let stopButton = document.querySelector('button.stop')
