@@ -48,7 +48,7 @@ const runModel = async(model,canvas)=>{
 			const size = [end[0]-start[0], end[1]-start[1]];
 			
 			let ctx = canvas.getContext('2d');
-			ctx.lineWidth = '4';
+			ctx.lineWidth = '6';
 			ctx.strokeStyle = 'rgba(255,0,0,.27)';
 			ctx.rect(start[0], start[1], size[0], size[1]);
 			ctx.stroke()
@@ -66,7 +66,7 @@ startButton.onclick = async()=>{
 	},30);
 	setInterval(()=>{
 		runModel(model, canvas);
-	},30);
+	},100);
 }
 
 let stopButton = document.querySelector('button.stop')
