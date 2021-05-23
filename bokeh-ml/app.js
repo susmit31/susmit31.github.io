@@ -32,7 +32,7 @@ const loadModel = async()=>{
 	return model;
 }
 
-const runModel = async(canvas, model)=>{
+const runModel = async(model,canvas)=>{
 	const return_tensors = false;
 	
 	const predictions = await model.estimateFaces(video, return_tensors);
@@ -43,8 +43,10 @@ const runModel = async(canvas, model)=>{
 			const size = [end[0]-start[0], end[1]-start[1]];
 			
 			let ctx = canvas.getContext('2d');
-			ctx.fillStyle = 'rgba(255,0,0,.27)';
-			ctx.fillRect(start[0], start[1], size[0], size[1]);
+			ctx.lineWidth = '4';
+			ctx.strokeStyle = 'rgba(255,0,0,.27)';
+			ctx.rect(start[0], start[1], size[0], size[1]);
+			ctx.stroke()
 		}
 	}
 }
@@ -58,7 +60,9 @@ startButton.onclick = async()=>{
 	getCamera();
 	setInterval(()=>{
 		drawToCanvas(video,canvas);
-		runModel(canvas, model);
+	},300);
+	setInterval(()=>{
+		runModel(model, canvas);
 	},300);
 }
 
