@@ -5,7 +5,7 @@ let simuln = null;
 let game = document.querySelector('#game');
 console.log();
 
-const N_COL = 18;
+const N_COL = 12;
 const BOX_SIZE = parseInt(
 		window.getComputedStyle(game).width
 	)/ N_COL;
@@ -29,7 +29,8 @@ let sqrs_grid = (()=>{
 })();
 
 Array.from(sqrs).forEach(c=>{
-	c.style.height = window.getComputedStyle(c).width;
+	c.style.width = BOX_SIZE;
+	c.style.height = BOX_SIZE;
 });
 
 const drawOnDrag = e=>{
@@ -108,12 +109,23 @@ const toggleLife = sqr=>{
 
 let simBtn = document.querySelector('.sim');
 let resetBtn = document.querySelector('.reset');
+let stopBtn = document.querySelector('.stop');
+
+stopBtn.addEventListener('click', e=>{
+	clearInterval(simuln);
+	simuln = null;
+	simBtn.disabled = false;
+});
 
 resetBtn.addEventListener('click', e=>{
-	window.location.reload();
+	Array.from(sqrs).forEach(s=>{
+		s.style.backgroundColor = INACTIVE_CLR;
+	})
+	stopBtn.click();
 });
 
 simBtn.addEventListener('click', e=>{
+	console.log(simuln);
 	if (simuln===null){
 		simuln = setInterval(()=>{
 			Array.from(sqrs).forEach(sqr=>{
@@ -129,9 +141,6 @@ simBtn.addEventListener('click', e=>{
 				}
 			});
 		},500);
-		simBtn.addEventListener('click',e=>{
-			clearInterval(simuln);
-			simuln = null;
-		})
+		e.target.disabled = true;
 	}
 });
