@@ -50,6 +50,9 @@ const faceBoundingBox = async(model,canvas)=>{
 			boundingBox = [start[0],start[1],size[0],size[1]]
 		}
 	}
+	else{
+		boundingBox = [0,0,0,0];
+	}
 }
 
 const drawBoundingBox = (boundingBox, canvas)=>{
