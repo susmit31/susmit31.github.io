@@ -70,7 +70,7 @@ startButton.onclick = async()=>{
 	getCamera();
 	setInterval(()=>{
 		drawToCanvas(video,canvas);
-	},100);
+	},30);
 	setInterval(()=>{
 		faceBoundingBox(model, canvas);
 	}, 500);
