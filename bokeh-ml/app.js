@@ -47,6 +47,7 @@ const runModel = async(canvas)=>{
 
 let startButton = document.querySelector('button.start');
 startButton.onclick = ()=>{
+	canvas.classList.remove('d-none');
 	getCamera();
 	setInterval(()=>{
 		drawToCanvas(video,canvas);
@@ -57,4 +58,5 @@ startButton.onclick = ()=>{
 let stopButton = document.querySelector('button.stop')
 stopButton.onclick = ()=>{
 	video.pause();
+	canvas.classList.add("d-none");
 }
