@@ -9,7 +9,7 @@ const N_COL = parseInt(window.getComputedStyle(game).width) > 700? 20: 12;
 const BOX_SIZE = parseInt(
 		window.getComputedStyle(game).width
 	)/ N_COL;
-const N_ROW = Math.floor(window.innerHeight * .9/BOX_SIZE);
+const N_ROW = Math.floor(window.innerHeight * .8/BOX_SIZE);
 
 Array(N_ROW*N_COL).fill(0).forEach(i=>{
 	game.appendChild(document.createElement('div'));
