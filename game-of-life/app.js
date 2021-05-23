@@ -5,7 +5,7 @@ let simuln = null;
 let game = document.querySelector('#game');
 console.log();
 
-const N_COL = 12;
+const N_COL = parseInt(window.getComputedStyle(game).width) > 700? 20: 12;
 const BOX_SIZE = parseInt(
 		window.getComputedStyle(game).width
 	)/ N_COL;
