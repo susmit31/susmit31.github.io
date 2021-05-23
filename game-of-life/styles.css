@@ -1,3 +1,7 @@
+:root{
+	font-size:14px;
+}
+
 #game{
 	display:flex;
 	flex-wrap:wrap;
@@ -11,4 +15,8 @@
 button:not(:last-child){
 	padding: 7px;
 	margin-right:10px;
+}
+
+.fs-6{
+	font-size:.3rem;
 }
