@@ -66,7 +66,7 @@ startButton.onclick = async()=>{
 	},30);
 	setInterval(()=>{
 		runModel(model, canvas);
-	},100);
+	},30);
 }
 
 let stopButton = document.querySelector('button.stop')
