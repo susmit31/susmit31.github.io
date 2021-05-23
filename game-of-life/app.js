@@ -43,14 +43,16 @@ const drawOnDrag = e=>{
 	else e.target.style.backgroundColor = INACTIVE_CLR;
 };
 
-game.onmousedown = ()=>{
+game.onmousedown = (e)=>{
+	toggleLife(e.target);
 	Array.from(sqrs).forEach(c=>{
 		c.addEventListener('mouseenter',drawOnDrag);
 	});
 };
 
 const mobileDrawOnDrag = e=>{
-	let x = e.clientX, y = e.clientY;
+	let touch = (typeof(e.originalEvent)=='undefined')? e.changedTouches[0] : e.originalEvent.changedTouches[0];
+	let x = touch.clientX, y = touch.clientY;
 	console.log(x);
 	console.log(y);
 	toggleLife(document.elementFromPoint(x,y))
