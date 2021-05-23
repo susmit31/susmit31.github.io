@@ -63,10 +63,10 @@ startButton.onclick = async()=>{
 	getCamera();
 	setInterval(()=>{
 		drawToCanvas(video,canvas);
-	},300);
+	},30);
 	setInterval(()=>{
 		runModel(model, canvas);
-	},300);
+	},100);
 }
 
 let stopButton = document.querySelector('button.stop')
