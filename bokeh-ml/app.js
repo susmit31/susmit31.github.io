@@ -24,13 +24,18 @@ const drawToCanvas = (video,canvas)=>{
 	canvas.width = video.videoWidth;
 	canvas.height = video.videoHeight;
 	let ctx = canvas.getContext('2d');
+	ctx.translate(canvas.width,0);
+	ctx.scale(-1,1);
 	ctx.drawImage(video, 0, 0);
 }
 
+let model;
 const loadModel = async()=>{
-	const model = await blazeface.load();
-	return model;
+	model = await blazeface.load();
 }
+loadModel();
+
+
 
 const runModel = async(model,canvas)=>{
 	const return_tensors = false;
@@ -51,8 +56,6 @@ const runModel = async(model,canvas)=>{
 	}
 }
 
-
-let model = await loadModel();
 
 let startButton = document.querySelector('button.start');
 startButton.onclick = async()=>{
