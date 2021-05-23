@@ -119,7 +119,6 @@ resetBtn.addEventListener('click', e=>{
 });
 
 simBtn.addEventListener('click', e=>{
-	console.log(simuln);
 	if (simuln===null){
 		simuln = setInterval(()=>{
 			Array.from(sqrs).forEach(sqr=>{
