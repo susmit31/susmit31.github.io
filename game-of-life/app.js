@@ -53,9 +53,8 @@ game.onmousedown = (e)=>{
 const mobileDrawOnDrag = e=>{
 	let touch = (typeof(e.originalEvent)=='undefined')? e.changedTouches[0] : e.originalEvent.changedTouches[0];
 	let x = touch.clientX, y = touch.clientY;
-	console.log(x);
-	console.log(y);
-	toggleLife(document.elementFromPoint(x,y))
+	let elem = document.elementFromPoint(x,y);
+	if (!isAlive(elem)) toggleLife(elem);
 }
 
 game.ontouchstart = (e)=>{
