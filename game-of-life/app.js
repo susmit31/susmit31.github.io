@@ -28,6 +28,17 @@ let sqrs_grid = (()=>{
 	return grid;
 })();
 
+const isAlive = sqr=>
+	window.getComputedStyle(sqr).backgroundColor == ACTIVE_CLR? 
+	true : false;
+
+const toggleLife = sqr=>{
+	if (isAlive(sqr)) sqr.style.backgroundColor = INACTIVE_CLR;
+	else sqr.style.backgroundColor = ACTIVE_CLR;
+}
+
+
+
 Array.from(sqrs).forEach(c=>{
 	c.style.width = BOX_SIZE;
 	c.style.height = BOX_SIZE;
@@ -44,6 +55,12 @@ game.onmousedown = (e)=>{
 		c.addEventListener('mouseenter',drawOnDrag);
 	});
 };
+
+Array.from(sqrs).forEach(s=>{
+	s.addEventListener('click',e=>{
+		toggleLife(e.target);
+	});
+});
 
 const mobileDrawOnDrag = e=>{
 	let touch = (typeof(e.originalEvent)=='undefined')? e.changedTouches[0] : e.originalEvent.changedTouches[0];
@@ -89,17 +106,6 @@ const findNeighbours = sqr => {
 	
 	return neighbours
 }
-
-const isAlive = sqr=>
-	window.getComputedStyle(sqr).backgroundColor == ACTIVE_CLR? 
-	true : false;
-
-const toggleLife = sqr=>{
-	if (isAlive(sqr)) sqr.style.backgroundColor = INACTIVE_CLR;
-	else sqr.style.backgroundColor = ACTIVE_CLR;
-}
-
-
 
 let simBtn = document.querySelector('.sim');
 let resetBtn = document.querySelector('.reset');
