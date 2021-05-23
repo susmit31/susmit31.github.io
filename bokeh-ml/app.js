@@ -27,6 +27,7 @@ const drawToCanvas = (video,canvas)=>{
 	ctx.translate(canvas.width,0);
 	ctx.scale(-1,1);
 	ctx.drawImage(video, 0, 0);
+	runModel(model,canvas);
 }
 
 let model;
@@ -48,10 +49,10 @@ const runModel = async(model,canvas)=>{
 			const size = [end[0]-start[0], end[1]-start[1]];
 			
 			let ctx = canvas.getContext('2d');
-			ctx.lineWidth = '6';
-			ctx.strokeStyle = 'rgba(255,0,0,.27)';
+			ctx.lineWidth = '2';
+			ctx.strokeStyle = 'tomato';
 			ctx.rect(start[0], start[1], size[0], size[1]);
-			ctx.stroke()
+			ctx.stroke();
 		}
 	}
 }
@@ -63,10 +64,7 @@ startButton.onclick = async()=>{
 	getCamera();
 	setInterval(()=>{
 		drawToCanvas(video,canvas);
-	},30);
-	setInterval(()=>{
-		runModel(model, canvas);
-	},100);
+	},300);
 }
 
 let stopButton = document.querySelector('button.stop')
