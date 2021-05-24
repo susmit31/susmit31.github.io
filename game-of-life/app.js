@@ -89,11 +89,7 @@ const generateTargets = (sqrs_grid, num_targets, targets_subgrid_dim)=>{
 		}
 	}
 	
-	console.log(xs);
-	console.log(ys);
-	
 	let targets = range(xs.length).map(i=>sqrs_grid[xs[i]][ys[i]]);
-	console.log(targets)
 	return targets;
 };
 
