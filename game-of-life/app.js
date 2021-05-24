@@ -107,7 +107,13 @@ const markTargets = targets=>{
 	});
 };
 
-const countLiveTargets = targets => targets.map(t=>isAlive(t)).reduce((a,b)=>a+b);
+const countLiveTargets = targets => {
+	let count = 0;
+	targets.forEach(t=>{
+		isAlive(t)? count++ : null;
+	});
+	return count;
+};
 
 //----------------------------
 // main
@@ -193,6 +199,12 @@ simBtn.addEventListener('click', e=>{
 					else null;
 				}
 			});
+			let targets =document.querySelectorAll('.target');
+			let live_targets = countLiveTargets(targets);
+			if (live_targets == 0){
+				alert('Game Over');
+				resetBtn.click();
+			}
 		},500);
 		e.target.disabled = true;
 		stopBtn.disabled = false;
