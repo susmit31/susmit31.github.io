@@ -20,3 +20,10 @@ button:not(:last-child){
 .fs-6{
 	font-size:.3rem;
 }
+
+.target{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-weight:bold;
+}
