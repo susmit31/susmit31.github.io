@@ -198,8 +198,11 @@ simBtn.addEventListener('click', e=>{
 			let targets =document.querySelectorAll('.target');
 			let live_targets = countLiveTargets(targets);
 			if (live_targets == 0){
-				alert('Game Over');
-				resetBtn.click();
+				
+				setTimeout(()=>{
+					alert('Game Over');
+					resetBtn.click();
+				}, 400);
 			}
 		},500);
 		e.target.disabled = true;
