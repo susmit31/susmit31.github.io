@@ -13,7 +13,7 @@ let simBtn = document.querySelector('.sim');
 let resetBtn = document.querySelector('.reset');
 let stopBtn = document.querySelector('.stop');
 
-const N_COL = parseInt(window.getComputedStyle(game).width) > 700? 20: 12;
+const N_COL = parseInt(window.getComputedStyle(game).width) > 700? 40: 18;
 const BOX_SIZE = parseInt(
 		window.getComputedStyle(game).width
 	)/ N_COL;
