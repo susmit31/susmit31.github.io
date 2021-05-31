@@ -27,3 +27,15 @@ button:not(:last-child){
 	justify-content:center;
 	font-weight:bold;
 }
+
+.container:nth-child(even){
+	opacity:0
+}
+
+#home{
+	margin-top:2vh;
+	height:96vh;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
