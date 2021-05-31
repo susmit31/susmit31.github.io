@@ -9,9 +9,12 @@ const NUM_TARGETS = 10;
 let simuln = null;
 
 let game = document.querySelector('#game');
+let home = document.querySelector('#home');
 let simBtn = document.querySelector('.sim');
 let resetBtn = document.querySelector('.reset');
 let stopBtn = document.querySelector('.stop');
+let gameBtn = document.querySelector('.gamestart');
+let helpBtn = document.querySelector('.help');
 
 const GAME_WD = parseInt(window.getComputedStyle(game).width);
 
@@ -19,7 +22,7 @@ const N_COL =  GAME_WD > 700? 40: GAME_WD > 500? 30: 18;
 const BOX_SIZE = parseInt(
 		window.getComputedStyle(game).width
 	)/ N_COL;
-const N_ROW = Math.floor(window.innerHeight * .8/BOX_SIZE);
+const N_ROW = Math.floor(window.innerHeight *.87/BOX_SIZE);
 
 const isAlive = sqr=>
 	window.getComputedStyle(sqr).backgroundColor == ACTIVE_CLR? 
@@ -135,8 +138,8 @@ let sqrs_grid = (()=>{
 })();
 
 Array.from(sqrs).forEach(c=>{
-	c.style.width = BOX_SIZE;
-	c.style.height = BOX_SIZE;
+	c.style.width = `${BOX_SIZE}px`;
+	c.style.height = `${BOX_SIZE}px`;
 });
 
 let targets = generateTargetsDefaults();
@@ -210,4 +213,38 @@ simBtn.addEventListener('click', e=>{
 		e.target.disabled = true;
 		stopBtn.disabled = false;
 	}
+});
+
+gameBtn.addEventListener('click',e=>{
+	document.querySelectorAll('.container')[1].style.opacity = 1;
+	home.style.display = 'none';
+});
+
+helpBtn.addEventListener('click',e=>{
+	let help = document.createElement('div');
+	let listContainer = document.createElement('div');
+	let crossBtn = document.createElement('div');
+	let list = document.createElement('ul');
+	
+	let rules = ['The white cells are called "alive", the gray ones are called "dead". The cells which will be alive at any generation of the simulation are determined by the following rules.',
+	'If a cell was alive in the previous generation, and has fewer than 2 or more than 3 live neighbours, then it dies in the next generation, due to underpopulation and overpopulation, respectively.',
+	'If a cell was dead in the previous generation, and has exactly three live neighbours, then it will become alive in the next generation, as if due to reproduction.',
+	'Once you draw an initial configuration of live cells, the above rules are used to simulate the next generations.',
+	'The cells marked with x are your targets - you have to save them at all costs. Your job is to draw such a pattern of live cells that maximises their survival time.']
+	
+	rules = rules.map(rule=>`<li>${rule}</li><br/>`);
+	list.innerHTML = rules.join('');
+	
+	crossBtn.innerHTML = 'x';
+	crossBtn.classList.add('cross-btn');
+	crossBtn.addEventListener('click',e=>{
+		let helpModal = document.querySelector('.help-modal');
+		helpModal.parentElement.removeChild(helpModal);
+	});
+	
+	listContainer.appendChild(list);
+	help.appendChild(listContainer);
+	help.appendChild(crossBtn);
+	help.classList.add('help-modal');
+	home.appendChild(help);
 });
