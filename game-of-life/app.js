@@ -20,12 +20,6 @@ let helpBtn = document.querySelector('.help');
 
 const GAME_WD = parseInt(window.getComputedStyle(game).width);
 
-const N_COL =  GAME_WD > 700? 40: GAME_WD > 500? 30: 18;
-const BOX_SIZE = parseInt(
-		window.getComputedStyle(game).width
-	)/ N_COL;
-const N_ROW = Math.floor(window.innerHeight *.87/BOX_SIZE);
-
 const isAlive = sqr=>
 	window.getComputedStyle(sqr).backgroundColor == ACTIVE_CLR? 
 	true : false;
@@ -100,7 +94,7 @@ const generateTargets = (sqrs_grid, num_targets, targets_subgrid_dim)=>{
 	return targets;
 };
 
-const generateTargetsDefaults = ()=>generateTargets(sqrs_grid,NUM_TARGETS,[Math.floor(NUM_TARGETS/2),2]);
+const generateTargetsDefaults = (sqrs_grid)=>generateTargets(sqrs_grid,NUM_TARGETS,[Math.floor(NUM_TARGETS/2),2]);
 
 const markTargets = targets=>{
 	targets.forEach(t=>{
@@ -118,76 +112,79 @@ const countLiveTargets = targets => {
 	return count;
 };
 
-//----------------------------
-// main
-//----------------------------
-
-Array(N_ROW*N_COL).fill(0).forEach(i=>{
-	game.appendChild(document.createElement('div'));
-});
-
-let sqrs = game.children;
-let sqrs_grid = (()=>{
-	let grid = [];
-	for (let i = 0; i<N_ROW; i++){
-		let row = [];
-		for (let j =0; j<N_COL; j++){
-			row.push(sqrs[N_COL*i + j]);
-		}
-		grid.push(row);
-	}
-	return grid;
-})();
-
-Array.from(sqrs).forEach(c=>{
-	c.style.width = `${BOX_SIZE}px`;
-	c.style.height = `${BOX_SIZE}px`;
-});
-
-let targets = generateTargetsDefaults();
-markTargets(targets);
-
-game.onmousedown = (e)=>{
-	toggleLife(e.target);
-	Array.from(sqrs).forEach(c=>{
-		c.addEventListener('mouseenter',drawOnDrag);
-	});
-};
-
-game.ontouchstart = (e)=>{
-	e.target.addEventListener('touchmove',mobileDrawOnDrag);
-};
-
-game.onmouseup = ()=>{
-	Array.from(sqrs).forEach(c=>{
-		c.removeEventListener('mouseenter',drawOnDrag);
-	})
-};
-
-game.ontouchend = (e)=>{
-	e.target.removeEventListener('touchmove',mobileDrawOnDrag);
-};
-
-stopBtn.addEventListener('click', e=>{
-	clearInterval(simuln);
-	simuln = null;
-	simBtn.disabled = false;
-	e.target.disabled = true;
-});
-
-resetBtn.addEventListener('click', e=>{
-	Array.from(sqrs).forEach(s=>{
-		s.style.backgroundColor = INACTIVE_CLR;
-		s.classList.remove('target');
-		s.innerHTML = '';
-	})
-	stopBtn.click();
-	stopBtn.disabled = true;
+//----------------------------------
+// make grid and add event handlers
+//----------------------------------
+let N_COL, N_ROW, BOX_SIZE;
+const calcGridSize = ()=>{
 	if (!explore){
-		let targets = generateTargetsDefaults();
-		markTargets(targets);
+		console.log(explore);
+		N_COL =  GAME_WD > 700? 40: GAME_WD > 500? 30: 18;
 	}
-});
+	else
+		N_COL =  GAME_WD > 700? 70: GAME_WD > 500? 50: 35;
+	BOX_SIZE = parseInt(
+			window.getComputedStyle(game).width
+		)/ N_COL;
+	N_ROW = Math.floor(window.innerHeight *.87/BOX_SIZE);
+}
+
+let sqrs, sqrs_grid;
+
+const makeGrid = ()=>{
+	calcGridSize();
+	Array(N_ROW*N_COL).fill(0).forEach(i=>{
+		game.appendChild(document.createElement('div'));
+	});
+
+	sqrs = game.children;
+	sqrs_grid = (()=>{
+		let grid = [];
+		for (let i = 0; i<N_ROW; i++){
+			let row = [];
+			for (let j =0; j<N_COL; j++){
+				row.push(sqrs[N_COL*i + j]);
+			}
+			grid.push(row);
+		}
+		return grid;
+	})();
+
+	Array.from(sqrs).forEach(c=>{
+		c.style.width = `${BOX_SIZE}px`;
+		c.style.height = `${BOX_SIZE}px`;
+	});
+	
+	makeTargets(sqrs_grid);
+};
+
+const makeTargets = (sqrs_grid)=>{
+	let targets = generateTargetsDefaults(sqrs_grid);
+	markTargets(targets);
+}
+
+const listenDrawing = (game)=>{
+	game.onmousedown = (e)=>{
+		toggleLife(e.target);
+		Array.from(sqrs).forEach(c=>{
+			c.addEventListener('mouseenter',drawOnDrag);
+		});
+	};
+
+	game.ontouchstart = (e)=>{
+		e.target.addEventListener('touchmove',mobileDrawOnDrag);
+	};
+
+	game.onmouseup = ()=>{
+		Array.from(sqrs).forEach(c=>{
+			c.removeEventListener('mouseenter',drawOnDrag);
+		})
+	};
+
+	game.ontouchend = (e)=>{
+		e.target.removeEventListener('touchmove',mobileDrawOnDrag);
+	};
+}
 
 const updateFrame = ()=>{
 	let newSqrs = Array.from(sqrs).map(a=>isAlive(a)? 1: 0);
@@ -212,66 +209,102 @@ const updateFrame = ()=>{
 	}
 }
 
-exploreBtn.addEventListener('click',e=>{
-	explore = true;
-	gameBtn.click();
-	document.querySelectorAll('.target').forEach(target=>{
-		toggleLife(target);
-		target.innerHTML = '';
-	});
-});
 
-simBtn.addEventListener('click', e=>{
-	if (simuln===null){
-		let intvl = explore? 200:500;
-		simuln = setInterval(()=>{
-			updateFrame();
-			if (!explore){
-				let targets =document.querySelectorAll('.target');
-				let live_targets = countLiveTargets(targets);
-				if (live_targets == 0){
-					setTimeout(()=>{
-						alert('Game Over');
-						resetBtn.click();
-					}, 400);
-				}
-			}
-		},intvl);
+const listenGameBtns = ()=>{
+	stopBtn.addEventListener('click', e=>{
+		clearInterval(simuln);
+		simuln = null;
+		simBtn.disabled = false;
 		e.target.disabled = true;
-		stopBtn.disabled = false;
-	}
-});
+	});
 
-gameBtn.addEventListener('click',e=>{
-	document.querySelectorAll('.container')[1].style.opacity = 1;
-	home.style.display = 'none';
-});
+	resetBtn.addEventListener('click', e=>{
+		Array.from(sqrs).forEach(s=>{
+			s.style.backgroundColor = INACTIVE_CLR;
+			s.classList.remove('target');
+			s.innerHTML = '';
+		})
+		stopBtn.click();
+		stopBtn.disabled = true;
+		if (!explore){
+			let targets = generateTargetsDefaults(sqrs_grid);
+			markTargets(targets);
+		}
+	});
 
-helpBtn.addEventListener('click',e=>{
-	let help = document.createElement('div');
-	let listContainer = document.createElement('div');
-	let crossBtn = document.createElement('div');
-	let list = document.createElement('ul');
-	
-	let rules = ['The white cells are called "alive", the gray ones are called "dead". The cells which will be alive at any generation of the simulation are determined by the following rules.',
-	'If a cell was alive in the previous generation, and has fewer than 2 or more than 3 live neighbours, then it dies in the next generation, due to underpopulation and overpopulation, respectively.',
-	'If a cell was dead in the previous generation, and has exactly three live neighbours, then it will become alive in the next generation, as if due to reproduction.',
-	'Once you draw an initial configuration of live cells, the above rules are used to simulate the next generations.',
-	'The cells marked with x are your targets - you have to save them at all costs. Your job is to draw such a pattern of live cells that maximises their survival time.']
-	
-	rules = rules.map(rule=>`<li>${rule}</li><br/>`);
-	list.innerHTML = rules.join('');
-	
-	crossBtn.innerHTML = 'x';
-	crossBtn.classList.add('cross-btn');
-	crossBtn.addEventListener('click',e=>{
-		let helpModal = document.querySelector('.help-modal');
-		helpModal.parentElement.removeChild(helpModal);
+	simBtn.addEventListener('click', e=>{
+		if (simuln===null){
+			let intvl = explore? 200:500;
+			simuln = setInterval(()=>{
+				updateFrame();
+				if (!explore){
+					let targets =document.querySelectorAll('.target');
+					let live_targets = countLiveTargets(targets);
+					if (live_targets == 0){
+						updateFrame();
+						setTimeout(()=>{
+							alert('Game Over');
+							resetBtn.click();
+						},200);
+					}
+				}
+			},intvl);
+			e.target.disabled = true;
+			stopBtn.disabled = false;
+		}
+	});
+}
+
+const listenMenuBtns = ()=>{
+	exploreBtn.addEventListener('click',e=>{
+		explore = true;
+		gameBtn.click();
+		document.querySelectorAll('.target').forEach(target=>{
+			toggleLife(target);
+			target.innerHTML = '';
+		});
 	});
 	
-	listContainer.appendChild(list);
-	help.appendChild(listContainer);
-	help.appendChild(crossBtn);
-	help.classList.add('help-modal');
-	home.appendChild(help);
-});
+	gameBtn.addEventListener('click',e=>{
+		makeGrid();
+		document.querySelectorAll('.container')[1].style.opacity = 1;
+		home.style.display = 'none';
+	});
+
+	helpBtn.addEventListener('click',e=>{
+		let help = document.createElement('div');
+		let listContainer = document.createElement('div');
+		let crossBtn = document.createElement('div');
+		let list = document.createElement('ul');
+		
+		let rules = ['The white cells are called "alive", the gray ones are called "dead". The cells which will be alive at any generation of the simulation are determined by the following rules.',
+		'If a cell was alive in the previous generation, and has fewer than 2 or more than 3 live neighbours, then it dies in the next generation, due to underpopulation and overpopulation, respectively.',
+		'If a cell was dead in the previous generation, and has exactly three live neighbours, then it will become alive in the next generation, as if due to reproduction.',
+		'Once you draw an initial configuration of live cells, the above rules are used to simulate the next generations.',
+		'The cells marked with x are your targets - you have to save them at all costs. Your job is to draw such a pattern of live cells that maximises their survival time.']
+		
+		rules = rules.map(rule=>`<li>${rule}</li><br/>`);
+		list.innerHTML = rules.join('');
+		
+		crossBtn.innerHTML = 'x';
+		crossBtn.classList.add('cross-btn');
+		crossBtn.addEventListener('click',e=>{
+			let helpModal = document.querySelector('.help-modal');
+			helpModal.parentElement.removeChild(helpModal);
+		});
+		
+		listContainer.appendChild(list);
+		help.appendChild(listContainer);
+		help.appendChild(crossBtn);
+		help.classList.add('help-modal');
+		home.appendChild(help);
+	});	
+}
+
+//------------------------------
+//---------- main --------------
+//------------------------------
+
+listenMenuBtns();
+listenDrawing(game);
+listenGameBtns();
