@@ -6,6 +6,7 @@ const ACTIVE_CLR = 'rgb(255, 255, 255)';
 const INACTIVE_CLR = '#5F9EA0';
 const NUM_TARGETS = 10;
 
+let explore = false;
 let simuln = null;
 
 let game = document.querySelector('#game');
@@ -14,6 +15,7 @@ let simBtn = document.querySelector('.sim');
 let resetBtn = document.querySelector('.reset');
 let stopBtn = document.querySelector('.stop');
 let gameBtn = document.querySelector('.gamestart');
+let exploreBtn = document.querySelector('.explore');
 let helpBtn = document.querySelector('.help');
 
 const GAME_WD = parseInt(window.getComputedStyle(game).width);
@@ -185,29 +187,51 @@ resetBtn.addEventListener('click', e=>{
 	stopBtn.disabled = true;
 });
 
+const updateFrame = ()=>{
+	let newSqrs = Array.from(sqrs).map(a=>isAlive(a)? 1: 0);
+	for(let i=0; i<newSqrs.length; i++){
+		let sqr = Array.from(sqrs)[i];
+		let neighs = findNeighbours(sqr);
+		const live_neighs = neighs.map(n=>isAlive(n)).reduce((a,b)=>a+b);
+		if (isAlive(sqr)){
+			if (live_neighs==2 || live_neighs==3) null;
+			else newSqrs[i] = 0;
+		}
+		else{
+			if (live_neighs==3) newSqrs[i]=1;
+			else null;
+		}
+	}
+	let oldSqrs = Array.from(sqrs);
+	for (let i=0; i<oldSqrs.length; i++){
+		if (newSqrs[i]==1 && !isAlive(oldSqrs[i])) toggleLife(oldSqrs[i]);
+		else if (newSqrs[i]==0 && isAlive(oldSqrs[i])) toggleLife(oldSqrs[i]);
+		else null;
+	}
+}
+
+exploreBtn.addEventListener('click',e=>{
+	explore = true;
+	gameBtn.click();
+	document.querySelectorAll('.target').forEach(target=>{
+		toggleLife(target);
+		target.innerHTML = '';
+	});
+});
+
 simBtn.addEventListener('click', e=>{
 	if (simuln===null){
 		simuln = setInterval(()=>{
-			Array.from(sqrs).forEach(sqr=>{
-				let neighs = findNeighbours(sqr);
-				const live_neighs = neighs.map(n=>isAlive(n)).reduce((a,b)=>a+b);
-				if (isAlive(sqr)){
-					if (live_neighs==2 || live_neighs==3) null;
-					else toggleLife(sqr);
+			updateFrame();
+			if (!explore){
+				let targets =document.querySelectorAll('.target');
+				let live_targets = countLiveTargets(targets);
+				if (live_targets == 0){
+					setTimeout(()=>{
+						alert('Game Over');
+						resetBtn.click();
+					}, 400);
 				}
-				else{
-					if (live_neighs==3) toggleLife(sqr);
-					else null;
-				}
-			});
-			let targets =document.querySelectorAll('.target');
-			let live_targets = countLiveTargets(targets);
-			if (live_targets == 0){
-				
-				setTimeout(()=>{
-					alert('Game Over');
-					resetBtn.click();
-				}, 400);
 			}
 		},500);
 		e.target.disabled = true;
