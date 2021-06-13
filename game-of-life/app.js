@@ -223,6 +223,7 @@ exploreBtn.addEventListener('click',e=>{
 
 simBtn.addEventListener('click', e=>{
 	if (simuln===null){
+		let intvl = explore? 400:500;
 		simuln = setInterval(()=>{
 			updateFrame();
 			if (!explore){
@@ -235,7 +236,7 @@ simBtn.addEventListener('click', e=>{
 					}, 400);
 				}
 			}
-		},500);
+		},intvl);
 		e.target.disabled = true;
 		stopBtn.disabled = false;
 	}
