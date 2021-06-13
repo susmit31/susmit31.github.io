@@ -223,7 +223,7 @@ exploreBtn.addEventListener('click',e=>{
 
 simBtn.addEventListener('click', e=>{
 	if (simuln===null){
-		let intvl = explore? 400:500;
+		let intvl = explore? 200:500;
 		simuln = setInterval(()=>{
 			updateFrame();
 			if (!explore){
