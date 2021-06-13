@@ -122,7 +122,7 @@ const calcGridSize = ()=>{
 		N_COL =  GAME_WD > 700? 40: GAME_WD > 500? 30: 18;
 	}
 	else
-		N_COL =  GAME_WD > 700? 50: GAME_WD > 500? 40: 28;
+		N_COL =  GAME_WD > 700? 50: GAME_WD > 500? 37: 24;
 	BOX_SIZE = parseInt(
 			window.getComputedStyle(game).width
 		)/ N_COL;
