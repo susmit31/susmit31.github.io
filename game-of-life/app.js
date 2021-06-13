@@ -181,11 +181,11 @@ resetBtn.addEventListener('click', e=>{
 		s.classList.remove('target');
 		s.innerHTML = '';
 	})
+	stopBtn.click();
+	stopBtn.disabled = true;
 	if (!explore){
 		let targets = generateTargetsDefaults();
 		markTargets(targets);
-		stopBtn.click();
-		stopBtn.disabled = true;
 	}
 });
 
