@@ -122,7 +122,7 @@ const calcGridSize = ()=>{
 		N_COL =  GAME_WD > 700? 40: GAME_WD > 500? 30: 18;
 	}
 	else
-		N_COL =  GAME_WD > 700? 70: GAME_WD > 500? 50: 35;
+		N_COL =  GAME_WD > 700? 50: GAME_WD > 500? 40: 28;
 	BOX_SIZE = parseInt(
 			window.getComputedStyle(game).width
 		)/ N_COL;
@@ -234,7 +234,7 @@ const listenGameBtns = ()=>{
 
 	simBtn.addEventListener('click', e=>{
 		if (simuln===null){
-			let intvl = explore? 200:500;
+			let intvl = explore? 400:500;
 			simuln = setInterval(()=>{
 				updateFrame();
 				if (!explore){
