@@ -68,7 +68,7 @@ document.querySelector('input').addEventListener('change', evt=>{
             upimg_preview.src = evt.target.result;
             canvas.height = upimg_preview.height;
             canvas.width = upimg_preview.width;
-            ctx.drawImage(upimg_preview,0,0);
+            ctx.drawImage(upimg_preview,0,0, canvas.width, canvas.height);
         }
     }
     reader.readAsDataURL(selectedFile);
