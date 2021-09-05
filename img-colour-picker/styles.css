@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  gap: 1vw;
+}
+.container > palette {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  align-items: center;
+  justify-content: center;
+}
+.container #hover {
+  width: 25vh;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-wrap: break-word;
+}
+
+/*# sourceMappingURL=styles.css.map */
