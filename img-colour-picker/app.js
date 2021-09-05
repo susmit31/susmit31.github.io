@@ -24,10 +24,12 @@ canvas.addEventListener('mousemove',evt=>{
 const pickColour = (evt, destn)=>{
     let x = evt.layerX;
     let y = evt.layerY;
-    let pixel = ctx.getImageData(x,y,1,1).data;
+    let pixel = Array.from(ctx.getImageData(x,y,1,1).data);
     let clr = `rgba(${pixel[0]},${pixel[1]},${pixel[2]},${pixel[3]/255})`;
     destn.style.backgroundColor = clr;
-    let hex = [d2h(pixel[0]),d2h(pixel[1]),d2h(pixel[2])];
+    let hex = pixel.map(v=>d2h(v));
+    if (magnitude(pixel) < 1e5) destn.style.color = 'white';
+    else destn.style.color='black';
     destn.textContent = `#${hex[0]}${hex[1]}${hex[2]}`;
 }
 
@@ -45,4 +47,8 @@ const d2h = d=>{
         num = Math.floor(num);
     }
     return h.length>1? h: '0'+h;
+}
+
+const magnitude = arr=>{
+    return arr.map(n=>n*n).reduce((m,n)=>m+n);
 }
