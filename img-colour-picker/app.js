@@ -27,7 +27,7 @@ const pickColour = (evt, destn)=>{
     let pixel = ctx.getImageData(x,y,1,1).data;
     let clr = `rgba(${pixel[0]},${pixel[1]},${pixel[2]},${pixel[3]/255})`;
     destn.style.backgroundColor = clr;
-    let hex = pixel.map(v=>d2h(v));
+    let hex = [d2h(pixel[0]),d2h(pixel[1]),d2h(pixel[2])];
     destn.textContent = `#${hex[0]}${hex[1]}${hex[2]}`;
 }
 
