@@ -1,7 +1,16 @@
 .container{
     display:flex;
+    flex-direction: column;
     gap: 1vw;
-    &>palette{
+    &>.row{
+        display:flex;
+        flex-direction: row;
+        gap: 1vw;
+        align-items:center;
+        justify-content: center;
+    }
+
+    #palette{
         display:flex;
         flex-direction: column;
         gap:1vh;
@@ -15,5 +24,11 @@
         align-items:center;
         justify-content: center;
         overflow-wrap: break-word;
+        border-radius:10px;
+        border: 2px solid black;
     }
+}
+
+img{
+    max-width:50vw;
 }

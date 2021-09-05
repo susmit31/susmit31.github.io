@@ -22,14 +22,17 @@ canvas.addEventListener('mousemove',evt=>{
 
 
 const pickColour = (evt, destn)=>{
-    let x = evt.layerX;
-    let y = evt.layerY;
+    let x = evt.clientX - canvas.offsetLeft;
+    console.log(canvas.offsetLeft)
+    let y = evt.clientY - canvas.offsetTop;
     let pixel = Array.from(ctx.getImageData(x,y,1,1).data);
     let clr = `rgba(${pixel[0]},${pixel[1]},${pixel[2]},${pixel[3]/255})`;
     destn.style.backgroundColor = clr;
     let hex = pixel.map(v=>d2h(v));
-    if (magnitude(pixel) < 1e5) destn.style.color = 'white';
-    else destn.style.color='black';
+    if (magnitude(pixel) < 1e5) 
+        destn.style.color = 'white';
+    else  
+        destn.style.color='black';
     destn.textContent = `#${hex[0]}${hex[1]}${hex[2]}`;
 }
 
@@ -52,3 +55,19 @@ const d2h = d=>{
 const magnitude = arr=>{
     return arr.map(n=>n*n).reduce((m,n)=>m+n);
 }
+
+const selectedFile = document.querySelector('input').files[0];
+let upimg = document.createElement('img');
+upimg.file = selectedFile;
+
+let newrow = document.createElement('div');
+newrow.classList.add('row');
+newrow.appendChild(upimg);
+document.querySelector('.container').appendChild(newrow);
+
+const reader = new FileReader();
+reader.onload = evt=>{
+    if (selectedFile) upimg.src = evt.target.result;
+    else upimg.display = 'none' 
+}
+reader.readAsDataURL(selectedFile);
