@@ -22,9 +22,9 @@ canvas.addEventListener('mousemove',evt=>{
 
 
 const pickColour = (evt, destn)=>{
-    let x = evt.clientX - canvas.offsetLeft;
+    let x = evt.clientX - canvas.offsetLeft - canvas.scrollLeft;
     console.log(canvas.offsetLeft)
-    let y = evt.clientY - canvas.offsetTop;
+    let y = evt.clientY - canvas.offsetTop - canvas.scrollTop;
     let pixel = Array.from(ctx.getImageData(x,y,1,1).data);
     let clr = `rgba(${pixel[0]},${pixel[1]},${pixel[2]},${pixel[3]/255})`;
     destn.style.backgroundColor = clr;
@@ -61,16 +61,15 @@ document.querySelector('input').addEventListener('change', evt=>{
     let upimg = document.createElement('img');
     upimg.file = selectedFile;
 
-    /*let newrow = document.createElement('div');
-    newrow.classList.add('row');
-    newrow.appendChild(upimg);
-    document.querySelector('.container').appendChild(newrow);
-    */
     let upimg_preview = document.querySelector('img');
     const reader = new FileReader();
     reader.onload = evt=>{
-        if (selectedFile) upimg_preview.src = evt.target.result;
-        else upimg_preview.display = 'none' 
+        if (selectedFile) {
+            upimg_preview.src = evt.target.result;
+            canvas.height = upimg_preview.height;
+            canvas.width = upimg_preview.width;
+            ctx.drawImage(upimg_preview,0,0);
+        }
     }
     reader.readAsDataURL(selectedFile);
 });
