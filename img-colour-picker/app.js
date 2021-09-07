@@ -23,8 +23,7 @@ hover.addEventListener('click', e=>{
 
 const pickColour = (evt, destn)=>{
     let x = evt.clientX - canvas.offsetLeft - canvas.scrollLeft;
-    console.log(canvas.offsetLeft)
-    let y = evt.clientY - canvas.offsetTop - canvas.scrollTop;
+    let y = evt.clientY - canvas.offsetTop - canvas.scrollTop + window.scrollY;
     let pixel = Array.from(ctx.getImageData(x,y,1,1).data);
     let clr = `rgba(${pixel[0]},${pixel[1]},${pixel[2]},${pixel[3]/255})`;
     destn.style.backgroundColor = clr;

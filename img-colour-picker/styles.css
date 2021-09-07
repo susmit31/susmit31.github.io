@@ -1,4 +1,5 @@
 .container {
+  background-color: powderblue;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -17,8 +18,12 @@
   color: white;
   background-color: orangered;
   padding: 15px;
-  margin-top: -10px;
+  margin-top: -5px;
   text-align: center;
+  border-radius: 5px;
+}
+.container > .row canvas, .container > .row .hover {
+  background-color: white;
 }
 @media screen and (min-width: 700px) {
   .container .row {
