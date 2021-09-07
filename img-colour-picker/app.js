@@ -56,20 +56,21 @@ const magnitude = arr=>{
     return arr.map(n=>n*n).reduce((m,n)=>m+n);
 }
 
-document.querySelector('input').addEventListener('change', evt=>{
+document.querySelector('input[type="file"]').addEventListener('change', evt=>{
     const selectedFile = document.querySelector('input').files[0];
-    let upimg = document.createElement('img');
-    upimg.file = selectedFile;
 
-    let upimg_preview = document.querySelector('img');
+    let upimg_preview = document.createElement('img');
     const reader = new FileReader();
     reader.onload = evt=>{
         if (selectedFile) {
-            upimg_preview.src = evt.target.result;
-            canvas.height = upimg_preview.height;
-            canvas.width = upimg_preview.width;
-            ctx.drawImage(upimg_preview,0,0, canvas.width, canvas.height);
-            document.querySelectorAll('.row')[2].removeChild(upimg_preview)
+            upimg_preview.src = reader.result;
+            upimg_preview.onload = ()=>{
+                let im_wd = upimg_preview.width;
+                let multiplier = im_wd > window.innerWidth/2 ? window.innerWidth/(2*im_wd) : 1
+                canvas.height = upimg_preview.height*multiplier;
+                canvas.width = upimg_preview.width*multiplier;
+                ctx.drawImage(upimg_preview,0,0, canvas.width, canvas.height);
+            }
         }
     }
     reader.readAsDataURL(selectedFile);
