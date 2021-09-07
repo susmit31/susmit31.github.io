@@ -15,6 +15,10 @@ img.onload = ()=>{
 
 
 let hover = document.querySelector('#hover');
+hover.addEventListener('click', e=>{
+    navigator.clipboard.writeText(hover.textContent);
+    alert('Copied colour!')
+})
 
 canvas.addEventListener('mousemove',evt=>{
     pickColour(evt,hover);
