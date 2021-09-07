@@ -1,27 +1,22 @@
-let img = new Image();
-img.crossOrigin = 'anonymous';
-img.src = 'https://cdn.pixabay.com/photo/2015/06/19/21/24/avenue-815297__480.jpg';
-
-
 let canvas = document.querySelector('#canvas');
-canvas.height = img.height;
-canvas.width = img.width;
-let ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth/2;
+canvas.height = window.innerHeight*.67;
+canvas.style.border = '2px solid black';
+canvas.style.borderRadius = '8px';
 
-img.onload = ()=>{
-    ctx.drawImage(img,0,0);
-    console.log('kosu')
-}
+let ctx = canvas.getContext('2d');
+ctx.font = '24px sans-serif';
+ctx.fillText('No file selected',canvas.width/2 - 96, canvas.height/2 - 12)
+
+canvas.addEventListener('mousemove',evt=>{
+    pickColour(evt,hover);
+})
 
 
 let hover = document.querySelector('#hover');
 hover.addEventListener('click', e=>{
     navigator.clipboard.writeText(hover.textContent);
     alert('Copied colour!')
-})
-
-canvas.addEventListener('mousemove',evt=>{
-    pickColour(evt,hover);
 })
 
 
@@ -40,9 +35,8 @@ const pickColour = (evt, destn)=>{
     destn.textContent = `#${hex[0]}${hex[1]}${hex[2]}`;
 }
 
-navigator.clipboard.writeText;
-
 const range = n => n==1 ? [0] : [...range(n-1),n-1];
+
 const d2h = d=>{
     if (d==0) return '00';
     let h = '';
