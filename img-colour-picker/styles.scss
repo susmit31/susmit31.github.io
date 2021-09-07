@@ -1,5 +1,4 @@
 .container{
-    background-color: powderblue;
     display:flex;
     flex-direction: column;
     gap: 25px;
@@ -22,9 +21,6 @@
             border-radius: 5px;
         }
 
-        canvas, .hover{
-            background-color: white;
-        }
     }
 
     @media screen and (min-width: 700px){
