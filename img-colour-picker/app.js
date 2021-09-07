@@ -6,7 +6,8 @@ canvas.style.borderRadius = '8px';
 
 let ctx = canvas.getContext('2d');
 ctx.font = '24px sans-serif';
-ctx.fillText('No file selected',canvas.width/2 - 96, canvas.height/2 - 12)
+ctx.textAlign = 'center';
+ctx.fillText('No file selected',canvas.width/2, canvas.height/2)
 
 canvas.addEventListener('mousemove',evt=>{
     pickColour(evt,hover);
