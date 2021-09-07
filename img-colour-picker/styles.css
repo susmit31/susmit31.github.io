@@ -5,10 +5,15 @@
 }
 .container > .row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1vw;
   align-items: center;
   justify-content: center;
+}
+@media screen and (min-width: 700px) {
+  .container .row {
+    flex-direction: row;
+  }
 }
 .container #palette {
   display: flex;
