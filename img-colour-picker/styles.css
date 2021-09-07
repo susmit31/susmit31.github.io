@@ -6,7 +6,7 @@
 .container > .row {
   display: flex;
   flex-direction: column;
-  gap: 1vw;
+  gap: 15px;
   align-items: center;
   justify-content: center;
 }
@@ -33,7 +33,11 @@
   border: 2px solid black;
 }
 
-input::file-selector-button {
+label[for=up-img] {
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: mediumseagreen;
   font-size: 1.25rem;
   height: 2.5rem;
@@ -41,6 +45,13 @@ input::file-selector-button {
   border: none;
   border-radius: 9999px;
   color: white;
+}
+label[for=up-img]:hover {
+  cursor: pointer;
+}
+
+input[type=file] {
+  opacity: 0;
 }
 
 img {
