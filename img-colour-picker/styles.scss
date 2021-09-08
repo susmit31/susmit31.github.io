@@ -53,7 +53,7 @@ label[for='up-img']{
     display:flex;
     align-items:center;
     justify-content:center;
-    background-color: mediumseagreen;
+    background-color: darken(mediumseagreen,8%);
     font-size:1.25rem;
     height: 2.5rem;
     width: clamp(15rem, 10vw, 30rem);
@@ -63,6 +63,7 @@ label[for='up-img']{
     color:white;
     &:hover{
         cursor:pointer;
+        background-color: mediumseagreen;
     }
     &.clicked{
         box-shadow:none;

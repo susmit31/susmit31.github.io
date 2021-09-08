@@ -49,7 +49,7 @@ label[for=up-img] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: mediumseagreen;
+  background-color: #32945e;
   font-size: 1.25rem;
   height: 2.5rem;
   width: clamp(15rem, 10vw, 30rem);
@@ -60,6 +60,7 @@ label[for=up-img] {
 }
 label[for=up-img]:hover {
   cursor: pointer;
+  background-color: mediumseagreen;
 }
 label[for=up-img].clicked {
   box-shadow: none;
