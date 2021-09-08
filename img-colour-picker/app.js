@@ -1,7 +1,6 @@
 let canvas = document.querySelector('#canvas');
 canvas.width = window.innerWidth/2;
 canvas.height = window.innerWidth/(window.innerWidth > 700? 3 : 2);
-canvas.style.border = '2px solid black';
 canvas.style.borderRadius = '8px';
 
 let ctx = canvas.getContext('2d');
