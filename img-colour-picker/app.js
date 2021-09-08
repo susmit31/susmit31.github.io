@@ -20,6 +20,12 @@ hover.addEventListener('click', e=>{
     alert('Copied colour!')
 })
 
+let btn = document.querySelector('label[for="up-img"]');
+btn.addEventListener('click',e=>{
+    btn.classList.toggle('clicked');
+    setTimeout(()=>{btn.classList.toggle('clicked')},
+    300);
+})
 
 const pickColour = (evt, destn)=>{
     let x = evt.clientX - canvas.offsetLeft - canvas.scrollLeft;
