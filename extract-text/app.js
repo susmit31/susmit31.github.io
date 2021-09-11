@@ -11,7 +11,11 @@ btn.onclick = e=>{
 
     fetch('https://susmit27.herokuapp.com/extract-text', options)
         .then(res=>res.json())
-        .then(jsonData=>{console.log(jsonData)})
+        .then(jsonData=>{
+            let textEl = document.querySelector('#text-target');
+            textEl.textContent = jsonData.text;
+            textEl.parentElement.style.display = 'block';
+        })
 }
 
 fileUpload.addEventListener('change', e=>{
