@@ -9,7 +9,7 @@ btn.onclick = e=>{
 
     const options = {method: 'POST', body: formdata}
 
-    fetch('http://127.0.0.1:5000/extract-text', options)
+    fetch('https://susmit27.herokuapp.com/extract-text', options)
         .then(res=>res.json())
         .then(jsonData=>{console.log(jsonData)})
 }
