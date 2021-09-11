@@ -9,7 +9,7 @@ btn.onclick = e=>{
 
     const options = {method: 'POST', body: formdata}
 
-    fetch('https://susmit27.herokuapp.com/extract-text', options)
+    fetch('http://susmit27.herokuapp.com/extract-text', options)
         .then(res=>res.json())
         .then(jsonData=>{
             let textEl = document.querySelector('#text-target');
