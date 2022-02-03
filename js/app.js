@@ -164,6 +164,12 @@ slideInSec();
 let anchors = document.querySelectorAll('a');
 anchors.forEach(x=>x.rel="noreferrer");
 
-// automatically set footer text
+// set footer text
 let footer = document.querySelector("#footer");
-footer.innerText = `&#169; Sarif M. Tasnim Islam, ${new Date().getFullYear()}`;
+let today = new Date(); 
+footer.innerText = `&#169; Sarif M. Tasnim Islam, ${today.getFullYear()}`;
+
+// set age
+let myage = document.querySelector("#myage");
+let bday = new Date("1998-08-07");
+myage.innerText = `${Math.floor((today-bday)/1000/365/24/3600)}`;
