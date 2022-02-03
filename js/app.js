@@ -161,6 +161,9 @@ setInterval(scrollSpy,300);
 slideInSec();
 
 // Set rel of all anchors to "noreferrer"
-
 let anchors = document.querySelectorAll('a');
 anchors.forEach(x=>x.rel="noreferrer");
+
+// automatically set footer text
+let footer = document.querySelector("#footer");
+footer.innerText = `&#169; Sarif M. Tasnim Islam, ${new Date().getFullYear()}`;
