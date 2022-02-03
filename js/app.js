@@ -167,7 +167,7 @@ anchors.forEach(x=>x.rel="noreferrer");
 // set footer text
 let footer = document.querySelector("#footer");
 let today = new Date(); 
-footer.innerText = `&#169; Sarif M. Tasnim Islam, ${today.getFullYear()}`;
+footer.innerHTML = `&#169; Sarif M. Tasnim Islam, ${today.getFullYear()}`;
 
 // set age
 let myage = document.querySelector("#myage");
