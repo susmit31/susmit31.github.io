@@ -52,9 +52,9 @@ let anim_type = (target, typeStartDelay, scrollStartDelay, keyStrokeIntervalMS)=
 	target.style.fontWeight="bold";
 
 	let text = "";
-	let textBig = "Med Student | Programmer | Aspiring Computational Biologist";
-	let textMid = "Med Student | Programmer | \nAspiring Computational Biologist";
-	let textSmol = "Med Student | Programmer | \nAspiring Computational \nBiologist";
+	let textBig = "Doctor | Programmer | Aspiring Computational Biologist";
+	let textMid = "Doctor | Programmer | \nAspiring Computational Biologist";
+	let textSmol = "Doctor | Programmer | \nAspiring Computational \nBiologist";
 
 	let wd = window.innerWidth;
 	if(wd<800 && wd>600) text = textMid;
