@@ -17,7 +17,9 @@ async function text_decoder(text_url){
 }
 
 const fetch_article = async (title) =>{
-
+	//###########################################
+	//## Allow user to input URL as well #######
+	//##########################################
 	let url = 'https://en.wikipedia.org/w/api.php?' + new URLSearchParams({
 		origin: '*',
 		action: 'parse',
@@ -112,7 +114,9 @@ const fetch_article = async (title) =>{
 		for (kw of exclusion_keywords){
 			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
 		}
-
+		//##############################################
+		//## Let the user decide this #################
+		//#############################################
 		lines_sorted = lines_sorted.slice(0,30);
 
 
