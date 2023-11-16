@@ -119,7 +119,7 @@ const fetch_article = async (title) =>{
 		let out_body = document.querySelector('.out-body');
 		let out_title = document.querySelector('.out-title');
 		out_title.innerText = title;
-		out_body.innerText = lines_sorted.join('\n');
+		out_body.innerText = lines_sorted.join('\n\n').replaceAll(/\n\n+/g,'\n\n');
 		document.body.style.border = '2px solid black';
 		document.querySelector('input').value = '';
 
