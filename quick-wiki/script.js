@@ -87,7 +87,7 @@ const fetch_article = async (title) =>{
 
 		for (word of Object.keys(word_scores)){
 			word_scores[word] /= max_count;
-			if (title.toLowerCase().includes(word)) word_scores[word] *= .6;
+			if (title.toLowerCase().includes(word)) word_scores[word] *= .75;
 		}
 
 		let lines_scores = {};
