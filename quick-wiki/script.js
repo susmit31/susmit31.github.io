@@ -17,7 +17,9 @@ async function text_decoder(text_url){
 }
 
 const fetch_article = async (title) =>{
-	title = title.toLowerCase().split(' ').map(word => word[0].toUpperCase()+word.slice(1)).join(' ')
+	if (title.toLowerCase() == title){
+		title = title.split(' ').map(word => word[0].toUpperCase()+word.slice(1)).join(' ')
+	}
 
 	let url = 'https://en.wikipedia.org/w/api.php?' + new URLSearchParams({
 		origin: '*',
@@ -88,6 +90,7 @@ const fetch_article = async (title) =>{
 
 		for (word of Object.keys(word_scores)){
 			word_scores[word] /= max_count;
+			if (title.toLowerCase().includes(word)) word_scores[word] *= .6;
 		}
 
 		let lines_scores = {};
@@ -108,7 +111,7 @@ const fetch_article = async (title) =>{
 			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
 		}
 
-		lines_sorted = lines_sorted.slice(0,25);
+		lines_sorted = lines_sorted.slice(0,30);
 
 
 		let out_body = document.querySelector('.out-body');
