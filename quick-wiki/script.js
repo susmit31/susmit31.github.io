@@ -17,10 +17,6 @@ async function text_decoder(text_url){
 }
 
 const fetch_article = async (title) =>{
-	let rest_words = title.split(' ').slice(1).join(' ');
-	if (title.toLowerCase() == title || rest_words.toLowerCase() == rest_words){
-		title = title.split(' ').map(word => word[0].toUpperCase()+word.slice(1)).join(' ')
-	}
 
 	let url = 'https://en.wikipedia.org/w/api.php?' + new URLSearchParams({
 		origin: '*',
