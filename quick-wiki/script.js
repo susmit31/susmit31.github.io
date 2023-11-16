@@ -101,15 +101,18 @@ const fetch_article = async (title) =>{
 
 		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation']
 		let lines_sorted = Object.keys(lines_scores).sort((x,y) => lines_scores[y] - lines_scores[x])
-		.filter(x => x.split(' ').length > 10)
+		.filter(x => x.split(' ').length > 8)
 		for (kw of exclusion_keywords){
 			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
 		}
 
 		lines_sorted = lines_sorted.slice(0,25);
 
-		let output = document.querySelector('.output')
-		output.innerText = lines_sorted.join('\n');
+
+		let out_body = document.querySelector('.out-body');
+		let out_title = document.querySelector('.out-title');
+		out_title.innerText = title;
+		out_body.innerText = lines_sorted.join('\n');
 		document.body.style.border = '2px solid black';
 		document.querySelector('input').value = '';
 
@@ -120,6 +123,6 @@ const fetch_article = async (title) =>{
 }
 
 generate_summary = (e)=>{
-	document.querySelector('.output').innerText = "Please wait, generating summary...";
+	document.querySelector('.out-body').innerText = "Please wait, generating summary...";
 	fetch_article(document.querySelector('input').value)
 };
