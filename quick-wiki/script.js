@@ -123,6 +123,7 @@ const fetch_article = async (title) =>{
 }
 
 generate_summary = (e)=>{
+	document.querySelector('.out-title').innerText = '';
 	document.querySelector('.out-body').innerText = "Please wait, generating summary...";
 	fetch_article(document.querySelector('input').value)
 };
