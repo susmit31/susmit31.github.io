@@ -33,7 +33,12 @@ const fetch_article = async (title) =>{
 		const parser = new DOMParser();
 		const parsed = parser.parseFromString(html, "text/html");
 		let txt = parsed.getElementsByTagName('body')[0].textContent;
-		txt = txt.slice(0,txt.indexOf('References'));
+		let idx = txt.indexOf('Notes');
+		if (idx == -1){
+			txt = txt.slice(0,txt.indexOf('References'));
+		} else {
+			txt = txt.slice(0, idx);
+		}
 		const tags = /<\/?(.)+?\>/ig;
 		const css = /(\n)+((@|\.|body|html|\.mw)[^\{]+\{[^\}]+?\})/ig;
 
