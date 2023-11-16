@@ -58,6 +58,10 @@ input {
 	margin-bottom: 10px;
 }
 
+.out-body{
+	width:100%;
+}
+
 @media screen and (max-width: 800px){
 	.form{
 		display:flex;
