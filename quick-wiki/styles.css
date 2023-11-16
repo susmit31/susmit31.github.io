@@ -1,5 +1,5 @@
 html {
-	font-size:22px;
+	font-size:20px;
 }
 
 
@@ -26,6 +26,10 @@ h1 {
 	font-size: 2.5rem;
 }
 
+h2 {
+	margin:0;
+}
+
 
 .form{
 	display: flex;
@@ -34,14 +38,16 @@ h1 {
 	align-items:center;
 	gap: 1rem;
 	padding:20px;
-}
-
-.form *{
-	font-size: 1.5rem;
+	margin-top: 30px;
 }
 
 input {
 	width: 84vw;
+	font-size: 1.5rem;
+}
+
+button{
+	font-size: 1.2rem;
 }
 
 .output {
