@@ -25,7 +25,6 @@ const fetch_article = async (title) =>{
 	});
 
 	try{
-		console.log('I\'m fine')
 		const response = await fetch(url);
 		const json = await response.json();
 		const html = json.parse.text['*'];
@@ -52,7 +51,6 @@ const fetch_article = async (title) =>{
 		// Fetching stopwords
 		url = 'https://raw.githubusercontent.com/igorbrigadir/stopwords/master/en/spacy.txt';
 
-		document.querySelector('.output').innerText = txt;
 		stops = await text_decoder(url);
 		const stopwords = stops.split('\n');
 
@@ -101,11 +99,19 @@ const fetch_article = async (title) =>{
 			score = 0;
 		}
 
-		let lines_sorted = Object.keys(lines_scores).sort((x,y) => lines_scores[y] - lines_scores[x]).filter(x => x.split(' ').length > 7).slice(0,20)
+		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation']
+		let lines_sorted = Object.keys(lines_scores).sort((x,y) => lines_scores[y] - lines_scores[x])
+		.filter(x => x.split(' ').length > 10)
+		for (kw of exclusion_keywords){
+			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
+		}
+
+		lines_sorted = lines_sorted.slice(0,25);
 
 		let output = document.querySelector('.output')
 		output.innerText = lines_sorted.join('\n');
 		document.body.style.border = '2px solid black';
+		document.querySelector('input').value = '';
 
 
 } catch (err) {
@@ -113,4 +119,7 @@ const fetch_article = async (title) =>{
 	}
 }
 
-generate_summary = (e)=>{fetch_article(document.querySelector('input').value)};
+generate_summary = (e)=>{
+	document.querySelector('.output').innerText = "Please wait, generating summary...";
+	fetch_article(document.querySelector('input').value)
+};
