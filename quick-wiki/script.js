@@ -17,6 +17,8 @@ async function text_decoder(text_url){
 }
 
 const fetch_article = async (title) =>{
+	title = title.toLowerCase().split(' ').map(word => word[0].toUpperCase()+word.slice(1)).join(' ')
+
 	let url = 'https://en.wikipedia.org/w/api.php?' + new URLSearchParams({
 		origin: '*',
 		action: 'parse',
