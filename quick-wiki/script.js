@@ -108,17 +108,20 @@ const fetch_article = async (title) =>{
 
 		for (word of Object.keys(word_scores)){
 			word_scores[word] /= max_count;
-			if (title.toLowerCase().includes(word)) word_scores[word] *= .75;
+			if (title.toLowerCase().includes(word)) word_scores[word] *= .7;
 		}
 
 		let lines_scores = {};
-		let score = 0;
+		let total_score = word_score = 0;
 		for (line of txt.split('.')){
 			for (word of line.split(' ')){
 				word = word.toLowerCase();
-				if (word_scores[word]) score += word_scores[word];
+				if (word_scores[word]){
+				  word_score = word_scores[word];
+				  total_score += word_score;
+				}
 			}
-			lines_scores[line] = score/line.split(' ').length;
+			lines_scores[line] = total_score/line.split(' ').length;
 			score = 0;
 		}
 
@@ -128,6 +131,15 @@ const fetch_article = async (title) =>{
 		for (kw of exclusion_keywords){
 			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
 		}
+		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(title.split(' ').length,15+title.split(' ').length);
+		console.log(top_words);
+		console.log(word_scores);
+		let w_regex;
+		for (word of top_words){
+			w_regex = new RegExp('(^|\\s)('+word+')(\\-)?(\\w*)','gim');
+			lines_sorted = lines_sorted.map(line => line.replaceAll(w_regex,'<b>$1$2$3$4</b>'));
+		}
+		console.log(lines_sorted);
 		//##############################################
 		//## Let the user decide this #################
 		//#############################################
@@ -137,7 +149,7 @@ const fetch_article = async (title) =>{
 		let out_body = document.querySelector('.out-body');
 		let out_title = document.querySelector('.out-title');
 		out_title.innerText = title;
-		out_body.innerText = lines_sorted.join('\n\n').replaceAll(/\n\n+/g,'\n\n');
+		out_body.innerHTML = lines_sorted.join('\n\n').replaceAll(/\n\n+/g,'<br><br>');
 		document.body.style.border = '2px solid black';
 		document.querySelector('input').value = '';
 
