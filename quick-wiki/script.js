@@ -108,7 +108,7 @@ const fetch_article = async (title) =>{
 			score = 0;
 		}
 
-		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation']
+		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation', 'template message']
 		let lines_sorted = Object.keys(lines_scores).sort((x,y) => lines_scores[y] - lines_scores[x])
 		.filter(x => x.split(' ').length > 8)
 		for (kw of exclusion_keywords){
