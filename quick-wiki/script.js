@@ -16,6 +16,20 @@ async function text_decoder(text_url){
 	return chunk;
 }
 
+const tokenise_text = text =>{
+	text = text.replaceAll(/[~`!@#\$%\^&\*\(\)\-\+=\[\]\{\};:'"\<\>,\?/]/g," ")
+    text = text.replaceAll(/\.([^0-9]+)/g,' $1')
+	let words = text.split(' ').filter(x=> x!='')//.map(sent => sent.split(' ').filter(x => x!=''));
+    return words;
+};
+
+const normalize_word = word => {
+};
+
+const term_freqs = text => {};
+
+const summariser = text =>{};
+
 const fetch_article = async (title) =>{
 	//###########################################
 	//## Allow user to input URL as well #######

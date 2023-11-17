@@ -1,5 +1,6 @@
 html {
 	font-size:20px;
+	font-color:#333;
 }
 
 
@@ -37,17 +38,28 @@ h2 {
 	justify-content: space-around;
 	align-items:center;
 	gap: 1rem;
-	padding:20px;
+	padding:5px 15px 5px 15px;
 	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 input {
-	width: 84vw;
+	width: 60vw;
 	font-size: 1.5rem;
+	border: 2px solid #333;
+	border-radius:999px;
+	text-align: center;
 }
 
 button{
 	font-size: 1.2rem;
+	min-width:250px;
+	border: 0px;
+	border-radius:9999px;
+	padding: 12px;
+	font-weight: bold;
+	background-color: #333;
+	color: #fff;
 }
 
 .output {
@@ -68,11 +80,17 @@ button{
 	width:100%;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 900px){
 	.form{
 		display:flex;
 		flex-direction:column;
 		justify-content: space-between;
 		gap: .3rem;
+	}
+	input{
+		width: 98%;
+	}
+	button{
+		width: 100%;
 	}
 }
