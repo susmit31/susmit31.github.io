@@ -29,6 +29,7 @@ h1 {
 
 h2 {
 	margin:0;
+	text-align:center;
 }
 
 
@@ -88,9 +89,6 @@ button{
 		flex-direction:column;
 		justify-content: space-between;
 		gap: .3rem;
-	}
-	h2{
-		text-align:center;
 	}
 	input{
 		width: 98%;
