@@ -137,7 +137,7 @@ const fetch_article = async (title) =>{
 		let total_score = word_score = 0;
 		let avg_score;
 		let best_score=0;
-		let COMPRESS_FACTOR = txt_split.length > 1000? 50: (txt_split.length > 500? 20: (txt_split.length > 100? 10: 3));
+		let COMPRESS_FACTOR = txt_split.length > 30 ? 15 : 3;
 		let counter=0;
 		let best_line='';
 		let best_lines = [];
@@ -166,8 +166,8 @@ const fetch_article = async (title) =>{
 
 		if (counter < COMPRESS_FACTOR) best_lines.push(best_line);
 
-		console.log(best_lines.filter(line => line.split(' ').length > 7));
-		console.log(txt);
+//		console.log(best_lines.filter(line => line.split(' ').length > 7));
+//		console.log(txt);
 
 		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation', 'template message', 'List of']
 		let lines_sorted = Object.keys(lines_scores).sort((x,y) => lines_scores[y] - lines_scores[x])
@@ -188,7 +188,7 @@ const fetch_article = async (title) =>{
 		for (line of Object.keys(lines_scores)){
 			if (lines_sorted.includes(line)) lines_out.push(line);
 		}
-		lines_sorted = lines_out;
+		lines_sorted = lines_out.includes(txt_split[0])? lines_out : [txt_split[0]].concat(lines_out);
 
 		let w_regex;
 		for (word of top_words){
