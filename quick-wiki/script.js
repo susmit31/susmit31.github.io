@@ -40,10 +40,20 @@ const fetch_article = async (title) =>{
 		page: title,
 		format: 'json',
 	});
+	let url_search = 'https://en.wikipedia.org/w/api.php?' + new URLSearchParams({
+		origin: '*',
+		action: 'opensearch',
+		search: title,
+		limit: '5',
+		format: 'json',
+	});
 
 	try{
 		const response = await fetch(url);
+		const response_search = await fetch(url_search);
 		const json = await response.json();
+		const json_search = await response_search.json();
+		console.log(json_search);
 		const html = json.parse.text['*'];
 
 		const parser = new DOMParser();
@@ -106,9 +116,11 @@ const fetch_article = async (title) =>{
 				max_count = curr_count; 
 		}
 
+		const TITLE_PENALTY = 0.7;
+
 		for (word of Object.keys(word_scores)){
 			word_scores[word] /= max_count;
-			if (title.toLowerCase().includes(word)) word_scores[word] *= .7;
+			if (title.toLowerCase().includes(word)) word_scores[word] *= TITLE_PENALTY;
 		}
 
 		let lines_scores = {};
@@ -125,7 +137,7 @@ const fetch_article = async (title) =>{
 			score = 0;
 		}
 
-		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation', 'template message']
+		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation', 'template message', 'List of']
 		let lines_sorted = Object.keys(lines_scores).sort((x,y) => lines_scores[y] - lines_scores[x])
 		.filter(x => x.split(' ').length > 8)
 		for (kw of exclusion_keywords){
@@ -134,18 +146,33 @@ const fetch_article = async (title) =>{
 		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(title.split(' ').length,15+title.split(' ').length);
 		console.log(top_words);
 		console.log(word_scores);
+		//##############################################
+		//## Let the user decide this #################
+		//#############################################
+
+		lines_sorted = lines_sorted.slice(0,30);
+
+		lines_sorted = lines_sorted.sort((line_a,line_b)=>{
+			let words_a = line_a.split(' ');
+			let words_b = line_b.split(' ');
+			let title_frac_a = words_a.filter(word => title.toLowerCase().includes(word.toLowerCase())).length;
+			let title_frac_b = words_b.filter(word => title.toLowerCase().includes(word.toLowerCase())).length;
+			let top_words_a = words_a.filter(word => top_words.includes(word.toLowerCase())).length;
+			//top_words_a = top_words_a.length ? top_words_a.reduce((x,y) => word_scores[y]+word_scores[x]) : 0;
+			let top_words_b = words_b.filter(word => top_words.includes(word.toLowerCase())).length;
+			//top_words_b = top_words_b.length ? top_words_b.reduce((x,y) => x+y) : 0;
+			return (title_frac_b+top_words_b - title_frac_a-top_words_a)
+		})
+
+		console.log(lines_sorted.map(line => [line, lines_scores[line]]));
+
 		let w_regex;
 		for (word of top_words){
 			w_regex = new RegExp('(^|\\s)('+word+')(\\-)?(\\w*)','gim');
 			lines_sorted = lines_sorted.map(line => line.replaceAll(w_regex,'<b>$1$2$3$4</b>'));
 		}
-		console.log(lines_sorted);
-		//##############################################
-		//## Let the user decide this #################
-		//#############################################
-		lines_sorted = lines_sorted.slice(0,30);
 
-
+		
 		let out_body = document.querySelector('.out-body');
 		let out_title = document.querySelector('.out-title');
 		out_title.innerText = title;
