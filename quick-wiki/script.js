@@ -58,6 +58,9 @@ const fetch_article = async (title) =>{
 
 		const parser = new DOMParser();
 		const parsed = parser.parseFromString(html, "text/html");
+
+		let infobox = parsed.querySelectorAll('.infobox');
+		for (info of infobox) info.parentElement.removeChild(info);
 		let txt = parsed.getElementsByTagName('body')[0].textContent;
 		let idx = txt.indexOf('Notes');
 		if (idx == -1){
@@ -65,12 +68,14 @@ const fetch_article = async (title) =>{
 		} else {
 			txt = txt.slice(0, idx);
 		}
+
+		
 		const tags = /<\/?(.)+?\>/ig;
 		const css = /(\n)+((@|\.|body|html|\.mw)[^\{]+\{[^\}]+?\})/ig;
 
 		// painful brute-force way to eliminate the CSS and HTML
 		txt = txt.replaceAll('}', '}\n')
-		txt = txt.replaceAll(tags,'');
+		txt = txt.replaceAll(tags,' ');
 
 		txt = txt.replaceAll(css,'');
 		txt = txt.replaceAll(/\n+/g, '\n');
