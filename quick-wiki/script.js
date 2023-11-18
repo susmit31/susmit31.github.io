@@ -62,6 +62,13 @@ const fetch_article = async (title) =>{
 		let infobox = parsed.querySelectorAll('.infobox');
 		for (info of infobox) info.parentElement.removeChild(info);
 		let txt = parsed.getElementsByTagName('body')[0].textContent;
+
+		txt = '';
+
+		for (para of parsed.querySelectorAll('p')){
+			if (!['TD','TR'].includes(para) && para.innerText.split(' ').length>8) txt += para.innerText + '\n';
+		}
+		
 		let idx = txt.indexOf('Notes');
 		if (idx == -1){
 			txt = txt.slice(0,txt.indexOf('References'));
@@ -78,12 +85,12 @@ const fetch_article = async (title) =>{
 		txt = txt.replaceAll(tags,' ');
 
 		txt = txt.replaceAll(css,'');
-		txt = txt.replaceAll(/\n+/g, '\n');
+		txt = txt.replaceAll(/\n+/g, '');
 		txt = txt.replaceAll('}','');
 
 		// Erasing all references
 		txt = txt.replace(/\[[0-9]+\]/g, '');
-		txt = txt.replaceAll(/([^\.])\n/ig, '$1.\n')
+		txt = txt.replaceAll(/([^\.])\n/ig, '$1.\n');
 		
 		// Fetching stopwords
 		url = 'https://raw.githubusercontent.com/igorbrigadir/stopwords/master/en/spacy.txt';
@@ -101,6 +108,7 @@ const fetch_article = async (title) =>{
 				words = words.filter(word => word != stop)
 			return words.join(' ')
 		});*/
+
 		for (stop of stopwords){
 			lines_words = lines_words.filter(word => word!=stop);
 		}
@@ -109,9 +117,11 @@ const fetch_article = async (title) =>{
 
 		let word_scores = {};
 		for (word of lines_words){
-			if (word_scores[word])
-				word_scores[word]+=1;
-			else word_scores[word] = 1;
+			if (word.length > 3){
+				if (word_scores[word])
+					word_scores[word]+=1;
+				else word_scores[word] = 1;
+			}
 		}
 
 		let max_count = curr_count = 0;
@@ -121,9 +131,17 @@ const fetch_article = async (title) =>{
 				max_count = curr_count; 
 		}
 
+		let txt_split = txt.split('.');
+
 		let lines_scores = {};
 		let total_score = word_score = 0;
-		for (line of txt.split('.')){
+		let avg_score;
+		let best_score=0;
+		let COMPRESS_FACTOR = txt_split.length > 1000? 50: (txt_split.length > 500? 20: (txt_split.length > 100? 10: 3));
+		let counter=0;
+		let best_line='';
+		let best_lines = [];
+		for (line of txt_split){
 			for (word of line.split(' ')){
 				word = word.toLowerCase();
 				if (word_scores[word]){
@@ -131,9 +149,25 @@ const fetch_article = async (title) =>{
 				  total_score += word_score;
 				}
 			}
-			lines_scores[line] = total_score/line.split(' ').length;
-			score = 0;
+			avg_score = total_score/line.split(' ').length;
+			lines_scores[line] = avg_score;
+			if (avg_score > best_score){
+				best_line = line;
+				best_score = avg_score;
+			}
+			counter++;
+			if (counter == COMPRESS_FACTOR){
+				counter = 0;
+				best_score = 0;
+				best_lines.push(best_line)
+			}
+			total_score = 0;
 		}
+
+		if (counter < COMPRESS_FACTOR) best_lines.push(best_line);
+
+		console.log(best_lines.filter(line => line.split(' ').length > 7));
+		console.log(txt);
 
 		let exclusion_keywords = ['See also', 'Further info', 'Main article', 'disambiguation', 'template message', 'List of']
 		let lines_sorted = Object.keys(lines_scores).sort((x,y) => lines_scores[y] - lines_scores[x])
