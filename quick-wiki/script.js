@@ -121,13 +121,6 @@ const fetch_article = async (title) =>{
 				max_count = curr_count; 
 		}
 
-		const TITLE_PENALTY = 0.7;
-
-		for (word of Object.keys(word_scores)){
-			word_scores[word] /= max_count;
-			if (title.toLowerCase().includes(word)) word_scores[word] *= TITLE_PENALTY;
-		}
-
 		let lines_scores = {};
 		let total_score = word_score = 0;
 		for (line of txt.split('.')){
@@ -157,19 +150,11 @@ const fetch_article = async (title) =>{
 
 		lines_sorted = lines_sorted.slice(0,30);
 
-		lines_sorted = lines_sorted.sort((line_a,line_b)=>{
-			let words_a = line_a.split(' ');
-			let words_b = line_b.split(' ');
-			let title_frac_a = words_a.filter(word => title.toLowerCase().includes(word.toLowerCase())).length;
-			let title_frac_b = words_b.filter(word => title.toLowerCase().includes(word.toLowerCase())).length;
-			let top_words_a = words_a.filter(word => top_words.includes(word.toLowerCase())).length;
-			//top_words_a = top_words_a.length ? top_words_a.reduce((x,y) => word_scores[y]+word_scores[x]) : 0;
-			let top_words_b = words_b.filter(word => top_words.includes(word.toLowerCase())).length;
-			//top_words_b = top_words_b.length ? top_words_b.reduce((x,y) => x+y) : 0;
-			return (title_frac_b+top_words_b - title_frac_a-top_words_a)
-		})
-
-		console.log(lines_sorted.map(line => [line, lines_scores[line]]));
+		let lines_out = [];
+		for (line of Object.keys(lines_scores)){
+			if (lines_sorted.includes(line)) lines_out.push(line);
+		}
+		lines_sorted = lines_out;
 
 		let w_regex;
 		for (word of top_words){
