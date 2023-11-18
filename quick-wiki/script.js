@@ -182,7 +182,7 @@ const fetch_article = async (title) =>{
 		//## Let the user decide this #################
 		//#############################################
 
-		lines_sorted = lines_sorted.slice(0,30);
+		lines_sorted = lines_sorted.slice(0,txt_split.length > 100? 30 : 18);
 
 		let lines_out = [];
 		for (line of Object.keys(lines_scores)){
