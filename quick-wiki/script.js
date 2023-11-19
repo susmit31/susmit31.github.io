@@ -131,7 +131,7 @@ const fetch_article = async (title) =>{
 				max_count = curr_count; 
 		}
 
-		let txt_split = txt.split('.');
+		let txt_split = txt.split('. ');
 
 		let lines_scores = {};
 		let total_score = word_score = 0;
