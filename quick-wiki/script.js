@@ -175,7 +175,7 @@ const fetch_article = async (title) =>{
 		for (kw of exclusion_keywords){
 			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
 		}
-		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(title.split(' ').length,15+title.split(' ').length);
+		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(30);
 		console.log(top_words);
 		console.log(word_scores);
 		//##############################################
@@ -192,8 +192,8 @@ const fetch_article = async (title) =>{
 
 		let w_regex;
 		for (word of top_words){
-			w_regex = new RegExp('(^|\\s)('+word+')(\\-)?(\\w*)','gim');
-			lines_sorted = lines_sorted.map(line => line.replaceAll(w_regex,'<b>$1$2$3$4</b>'));
+			w_regex = new RegExp('(^|\\s)('+word+')(\\-)?(\\w*)','im');
+			lines_sorted = lines_sorted.map(line => line.replace(w_regex,'<b>$1$2$3$4</b>'));
 		}
 
 		
