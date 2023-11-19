@@ -85,7 +85,7 @@ const fetch_article = async (title) =>{
 		txt = txt.replaceAll(tags,' ');
 
 		txt = txt.replaceAll(css,'');
-		txt = txt.replaceAll(/\n+/g, '');
+		txt = txt.replaceAll(/\n+/g, ' ');
 		txt = txt.replaceAll('}','');
 
 		// Erasing all references
