@@ -175,7 +175,7 @@ const fetch_article = async (title) =>{
 		for (kw of exclusion_keywords){
 			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
 		}
-		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(30);
+		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(22);
 		console.log(top_words);
 		console.log(word_scores);
 		//##############################################
