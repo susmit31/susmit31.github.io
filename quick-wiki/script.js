@@ -131,6 +131,11 @@ const fetch_article = async (title) =>{
 				max_count = curr_count; 
 		}
 
+
+		for (word of Object.keys(word_scores)){
+			word_scores[word] /= max_count;
+		}
+		
 		let txt_split = txt.split('. ');
 
 		let lines_scores = {};
@@ -175,8 +180,8 @@ const fetch_article = async (title) =>{
 		for (kw of exclusion_keywords){
 			lines_sorted = lines_sorted.filter(line => !line.includes(kw));
 		}
-		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(0,25);
-		console.log(top_words);
+		let top_words = Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]).slice(title.split(' ').length,25+title.split(' ').length);
+		console.log( Object.keys(word_scores).sort((x,y) => word_scores[y] - word_scores[x]));
 		console.log(word_scores);
 		//##############################################
 		//## Let the user decide this #################
