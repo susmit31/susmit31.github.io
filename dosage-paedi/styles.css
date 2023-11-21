@@ -1,0 +1,25 @@
+body{
+	height: 92vh;
+	display:flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 1vh;
+	font-size: 24px;
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+
+#search {
+	height: 50px;
+	width: 90vw;
+	font-size: 28px;
+}
+
+#search-bar{
+	display: flex;
+	flex-direction: row;
+	justify-items: space-between;
+	gap: 1rem;
+}
