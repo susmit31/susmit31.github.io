@@ -1,7 +1,7 @@
 {
   "name": "StudyTimer",
   "short_name": "StudyTimer",
-  "start_url": "https://susmit31.github.io/timer",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
