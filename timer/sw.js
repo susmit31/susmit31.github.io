@@ -3,8 +3,8 @@ self.addEventListener("install", (e) => {
     caches.open("timer-cache").then((cache) => {
       return cache.addAll([
         "/",
-        "/index.html",
-        "../assets/susmit.png"
+        "index.html",
+        "susmit.png"
       ]);
     })
   );

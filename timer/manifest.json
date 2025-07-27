@@ -5,10 +5,11 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
-  "description": "A circular timer app.",
+  "description": "A simple study timer app.",
   "icons": [
     {
-      "src": "../assets/susmit.png",
+      "src": "susmit.png",
+      "sizes": "500x500",
       "type": "image/png"
     }
   ]
