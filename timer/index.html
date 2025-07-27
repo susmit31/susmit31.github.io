@@ -183,11 +183,10 @@
           let stopButton = document.querySelector("#stopButton");
           
           let timer;
-          
+          let valElem = document.querySelector("#value");
+          let hideOnStart = document.querySelectorAll(".hideOnStart");          
           let startClicked = e => {
             let currVal = e.target.innerText;
-            let valElem = document.querySelector("#value");
-            let hideOnStart = document.querySelectorAll(".hideOnStart");
             if (currVal === "START") {
                 console.log(valElem.innerHTML);
                 e.target.innerText = "PAUSE";
@@ -236,7 +235,12 @@
           }
           
           let stopClicked = e => {
-          	console.log(e.target.innerHTML);
+            valElem.innerHTML = "0";
+            Array.from(hideOnStart).map(
+              elem => {elem.style.display = "flex";}
+            );
+            clearInterval(timer);
+            startButton.innerText = "START";
           }
           
           startButton.addEventListener("click", startClicked);
