@@ -204,7 +204,7 @@
                 	elem => {elem.style.display = "none";}
                 );
                 
-                valElem.innerHTML = valElem.innerHTML + ":00";
+                valElem.innerHTML = valElem.innerHTML.toString().padStart(2, '0') + ":00";
                 valElem.style.fontSize = "100px";
                 }
                 
@@ -221,18 +221,14 @@
                         minute -= 1;
                     }
                     
-                    valElem.innerHTML = minute + ":" + second.toString().padStart(2, '0');
+                    valElem.innerHTML = minute.toString().padStart(2,'0') + ":" + second.toString().padStart(2, '0');
                     
                     if (minute == -1){
-                      valElem.innerHTML = "0";
-                      Array.from(hideOnStart).map(
-                        elem => {elem.style.display = "flex";}
-                      );
-                      clearInterval(timer);
-                      e.target.innerText = "START";
-
                       let audio = new Audio("../assets/correct-choice.wav");
                       audio.play();
+                      stopButton.click();
+
+
                     }                    
                 }, 1000)
             } else {
