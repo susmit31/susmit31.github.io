@@ -11,6 +11,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<meta name="description" content="Simple Timer App">
+		<link rel="manifest" href="manifest.json">
+		<meta name="theme-color" content="#000000">
 		  <style>
 		    body {
 		      font-family: sans-serif;
@@ -240,6 +242,13 @@
           
           startButton.addEventListener("click", startClicked);
           stopButton.addEventListener("click", stopClicked);
+
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/sw.js").then(() => {
+              console.log("Service Worker Registered");
+            });
+          }
+          
 		</script>
 	</body>
 </html>
