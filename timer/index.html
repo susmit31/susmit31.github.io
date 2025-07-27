@@ -82,6 +82,15 @@
 		    .hideOnStart{
 		    	/*display: none;*/
 		    }
+            
+            #value {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: default;
+}
+
 		  </style>
 	</head>
 	<body>
@@ -243,14 +252,47 @@
             startButton.innerText = "START";
           }
           
+          let wakeLock = null;
+
+          // Request wake lock
+          async function requestWakeLock() {
+            try {
+              wakeLock = await navigator.wakeLock.request('screen');
+              console.log('Wake Lock is active.');
+
+              // Re-acquire if visibility changes
+              document.addEventListener('visibilitychange', async () => {
+                if (wakeLock === null && document.visibilityState === 'visible') {
+                  wakeLock = await navigator.wakeLock.request('screen');
+                  console.log('Wake Lock re-acquired.');
+                }
+              });
+            } catch (err) {
+              console.error(`Wake Lock request failed: ${err.name}, ${err.message}`);
+            }
+          }
+
+          // Release wake lock
+          async function releaseWakeLock() {
+            if (wakeLock !== null) {
+              await wakeLock.release();
+              wakeLock = null;
+              console.log('Wake Lock released.');
+            }
+          }
+
+          
           startButton.addEventListener("click", startClicked);
+          startButton.addEventListener("click", requestWakeLock);
           stopButton.addEventListener("click", stopClicked);
+          stopButton.addEventListener("click", releaseWakeLock);
 
           if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/sw.js").then(() => {
               console.log("Service Worker Registered");
             });
           }
+          
           
 		</script>
 	</body>
