@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>StudyTime</title>		
+		<link rel="icon" href="susmit.png">
+		<link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@200&display=swap" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet"> 
+		
+		<meta property='og:image' content='../assets/susmit.jpg'>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<meta name="description" content="Simple Timer App">
+		<link rel="manifest" href="manifest.json">
+		<meta http-equiv="Content-Type" content="application/manifest+json">
+		<meta name="theme-color" content="#000000">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		  <style>
+		    body {
+		      font-family: sans-serif;
+		      background: #1E1E1E;
+		      height: 100vh;
+		      display: flex;
+		      justify-content: center;
+		      align-items: center;
+		    }
+		    svg {
+		      width: 350px;
+		      height: 350px;
+		      touch-action: none;
+		    }
+		    #track {
+		      stroke: #F2BCB2;
+		      stroke-width: 10;
+		      fill: none;
+		    }
+		    #arc {
+		      stroke: #C2715F;
+		      stroke-width: 10;
+		      fill: none;
+		      stroke-linecap: round;
+		    }
+		    #knob {
+		      fill: #512827;
+		      cursor: pointer;
+		    }
+		    #value {
+		      font-size: 80px;
+		      text-anchor: middle;
+		      dominant-baseline: middle;
+              font-weight: bold;
+		      fill: #fff;
+		    }
+
+		    .container{
+		    	display: flex;
+		    	align-items: center;
+		    	justify-content: center;
+                gap: 20px;
+		    }
+            
+            .colcontainer{
+            	flex-direction:column;
+            }
+		    
+            .buttons{
+            	font-size: 25px;
+            }
+            
+            .buttons *{
+            	color: white;
+                font-weight: bold;
+                padding: 15px 35px;
+                border-radius: 50px;
+            }
+            
+            #startButton{
+            	background: #336F4E;
+            }
+            
+            #stopButton{
+            	background: #B73B0C;
+            }
+            
+		    .hideOnStart{
+		    	/*display: none;*/
+		    }
+            
+            #value {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: default;
+}
+
+		  </style>
+	</head>
+	<body>
+		<div class="container colcontainer">
+			<div class="container">
+				<div id="timer">
+				<svg id="slider" viewBox="0 0 300 300">
+				  <circle class="hideOnStart" id="track" cx="150" cy="150" r="100"/>
+				  <path id="arc" class="hideOnStart" d=""/>
+				  <circle id="knob" class="hideOnStart" r="10" cx="150" cy="50"/>
+				  <text id="value" x="150" y="153">0</text>
+				</svg>
+				</div>
+			</div>
+			<div class="container buttons">
+				<div id="startButton">
+					START
+				</div>
+				<div id="stopButton">
+					RESET
+				</div>
+			</div>
+			
+		</div>
+		<script>
+		  const svg = document.getElementById("slider");
+		  const knob = document.getElementById("knob");
+		  const arc = document.getElementById("arc");
+		  const valueText = document.getElementById("value");
+		  const cx = 150, cy = 150, r = 100;
+
+		  function polarToCartesian(cx, cy, r, angle) {
+		    return {
+		      x: cx + r * Math.cos(angle),
+		      y: cy + r * Math.sin(angle)
+		    };
+		  }
+
+		  function describeArc(cx, cy, r, startAngle, endAngle) {
+		    const start = polarToCartesian(cx, cy, r, startAngle);
+		    const end = polarToCartesian(cx, cy, r, endAngle);
+		    const largeArc = endAngle - startAngle > Math.PI ? 1 : 0;
+		    return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} 1 ${end.x} ${end.y}`;
+		  }
+
+		  function updateFromValue(value) {
+		    const clamped = Math.max(0, Math.min(value, 100));
+		    const startAngle = -Math.PI / 2; // 12 o'clock
+		    const endAngle = startAngle + (clamped / 100) * 2 * Math.PI;
+		    const pos = polarToCartesian(cx, cy, r, endAngle);
+		    knob.setAttribute("cx", pos.x);
+		    knob.setAttribute("cy", pos.y);
+		    arc.setAttribute("d", describeArc(cx, cy, r, startAngle, endAngle));
+		    valueText.textContent = Math.round(clamped);
+		  }
+
+		  function angleFromCoords(x, y) {
+		    return Math.atan2(y - cy, x - cx);
+		  }
+
+		  function getEventCoords(e) {
+		    return e.touches ? [e.touches[0].clientX, e.touches[0].clientY] : [e.clientX, e.clientY];
+		  }
+
+		  function onMove(e) {
+		    const rect = svg.getBoundingClientRect();
+		    const [x, y] = getEventCoords(e);
+		    const svgX = x - rect.left;
+		    const svgY = y - rect.top;
+		    let angle = angleFromCoords(svgX, svgY); // [-π, π]
+		    let value = ((angle + Math.PI / 2 + 2 * Math.PI) % (2 * Math.PI)) / (2 * Math.PI);
+		    updateFromValue(value * 100);
+		  }
+
+		  function startDrag(e) {
+		    onMove(e);
+		    document.addEventListener("mousemove", onMove);
+		    document.addEventListener("mouseup", stopDrag);
+		    document.addEventListener("touchmove", onMove, { passive: false });
+		    document.addEventListener("touchend", stopDrag);
+		  }
+
+		  function stopDrag() {
+		    document.removeEventListener("mousemove", onMove);
+		    document.removeEventListener("mouseup", stopDrag);
+		    document.removeEventListener("touchmove", onMove);
+		    document.removeEventListener("touchend", stopDrag);
+		  }
+
+		  knob.addEventListener("mousedown", startDrag);
+		  knob.addEventListener("touchstart", startDrag, { passive: false });
+
+		  // Initialize at zero
+		  updateFromValue(0);
+          
+          
+          // Timer logic
+          let startButton = document.querySelector("#startButton");
+          let stopButton = document.querySelector("#stopButton");
+          
+          let timer;
+          let valElem = document.querySelector("#value");
+          let hideOnStart = document.querySelectorAll(".hideOnStart");          
+          let startClicked = e => {
+            let currVal = e.target.innerText;
+            if (currVal === "START") {
+                console.log(valElem.innerHTML);
+                e.target.innerText = "PAUSE";
+                if (document.querySelector(".hideOnStart").style.display !== "none"){
+                Array.from(hideOnStart).map(
+                	elem => {elem.style.display = "none";}
+                );
+                
+                valElem.innerHTML = valElem.innerHTML.toString().padStart(2, '0') + ":00";
+                valElem.style.fontSize = "100px";
+                }
+                
+                timer = setInterval(()=>{
+                	let [minute, second] = valElem.innerHTML.split(":");
+                    
+                    minute = parseInt(minute);
+                    second = parseInt(second);
+                    
+                    second-=1;
+                    
+                    if (second == -1) {
+                    	second = 59;
+                        minute -= 1;
+                    }
+                    
+                    valElem.innerHTML = minute.toString().padStart(2,'0') + ":" + second.toString().padStart(2, '0');
+                    
+                    if (minute == -1){
+                      let audio = new Audio("./correct-choice.wav");
+                      audio.play();
+                      stopButton.click();
+
+
+                    }                    
+                }, 1000)
+            } else {
+            	console.log("NO");
+                
+                e.target.innerText = "START";
+                clearInterval(timer); 
+            }
+          }
+          
+          let stopClicked = e => {
+            valElem.innerHTML = "0";
+            Array.from(hideOnStart).map(
+              elem => {elem.style.display = "flex";}
+            );
+            clearInterval(timer);
+            startButton.innerText = "START";
+          }
+          
+          let wakeLock = null;
+
+          // Request wake lock
+          async function requestWakeLock() {
+            try {
+              wakeLock = await navigator.wakeLock.request('screen');
+              console.log('Wake Lock is active.');
+
+              // Re-acquire if visibility changes
+              document.addEventListener('visibilitychange', async () => {
+                if (wakeLock === null && document.visibilityState === 'visible') {
+                  wakeLock = await navigator.wakeLock.request('screen');
+                  console.log('Wake Lock re-acquired.');
+                }
+              });
+            } catch (err) {
+              console.error(`Wake Lock request failed: ${err.name}, ${err.message}`);
+            }
+          }
+
+          // Release wake lock
+          async function releaseWakeLock() {
+            if (wakeLock !== null) {
+              await wakeLock.release();
+              wakeLock = null;
+              console.log('Wake Lock released.');
+            }
+          }
+
+          
+          startButton.addEventListener("click", startClicked);
+          startButton.addEventListener("click", requestWakeLock);
+          stopButton.addEventListener("click", stopClicked);
+          stopButton.addEventListener("click", releaseWakeLock);
+
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/sw.js").then(() => {
+              console.log("Service Worker Registered");
+            });
+          }
+          
+          
+		</script>
+	</body>
+</html>
