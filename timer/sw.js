@@ -4,7 +4,10 @@ self.addEventListener("install", (e) => {
       return cache.addAll([
         "/",
         "index.html",
-        "susmit.png"
+        "android-chrome-512x512.png",
+        "android-chrome-192x192.png",
+        "manifest.json",
+        "sw.js"
       ]);
     })
   );
